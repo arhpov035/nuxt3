@@ -1,5 +1,5 @@
 <template>
-<div class="page-product">
+  <div class="page-product">
     <div class="container">
       <div class="product-desc">
         <div class="img">
@@ -27,6 +27,7 @@
               </div>
             </div>
           </div>
+          <fillingSlide />
         </div>
       </div>
     </div>
@@ -34,16 +35,16 @@
 </template>
 
 <script setup>
-const route = useRoute()
+const route = useRoute();
 
 // const { data: product } = await useAsyncData("count", () =>
 //   $fetch("http://api.tortam.ru/api/v1/product/"+route.params.slug)
 // );
 
-const { data: product } = await useFetch("http://api.tortam.ru/api/v1/product/"+route.params.slug)
-
+const { data: product } = await useFetch(
+  "http://api.tortam.ru/api/v1/product/" + route.params.slug
+);
 </script>
-
 
 <style scoped>
 .page-product {
@@ -113,4 +114,3 @@ h1 {
   color: #414141;
 }
 </style>
-
