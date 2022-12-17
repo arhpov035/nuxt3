@@ -3,15 +3,10 @@
     <TheNavigation />
     <div class="container">
       <NuxtPage />
-      <h1 class="text-3xl font-bold underline">Hello world!</h1>
     </div>
   </div>
 </template>
-<!-- <script setup>
-const { data: users } = await useAsyncData('users', () =>
-  $fetch(`http://api.tortam.ru/api/v1/products`)
-);
-</script> -->
+
 
 <style scoped>
 .container {
