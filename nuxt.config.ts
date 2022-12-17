@@ -8,6 +8,7 @@ export default defineNuxtConfig({
                 autoImports: ['defineStore', 'acceptHMRUpdate'],
             },
         ],
+        // [`@twicpics/components/nuxt3`],
     ],
     css: ['~/assets/css/main.css'],
     postcss: {
