@@ -37,8 +37,6 @@
 </template>
 
 <script setup>
-import fillingSlide from "~/components/detail_card/slides/fillingSlide.vue";
-import sidebarLeft from "~/components/detail_card/sidebarLeft.vue";
 const route = useRoute();
 
 // const { data: product } = await useAsyncData("count", () =>
@@ -51,7 +49,14 @@ const { data: product } = await useFetch(
 </script>
 
 <script>
-export default {};
+import fillingSlide from "~/components/detail_card/slides/fillingSlide.vue";
+import sidebarLeft from "~/components/detail_card/sidebarLeft.vue";
+export default {
+  components: {
+    sidebarLeft,
+    fillingSlide
+  },
+};
 </script>
 
 <style scoped>
