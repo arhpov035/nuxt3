@@ -1,6 +1,6 @@
 <template>
   <div class="page-product">
-    <div class="container">
+    <div class="container-product">
       <div class="product-desc">
         <div class="img">
           <img
@@ -27,14 +27,18 @@
               </div>
             </div>
           </div>
+          <Weight />
           <fillingSlide />
         </div>
+        <sidebarLeft />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import fillingSlide from "~/components/detail_card/slides/fillingSlide.vue";
+import sidebarLeft from "~/components/detail_card/sidebarLeft.vue";
 const route = useRoute();
 
 // const { data: product } = await useAsyncData("count", () =>
@@ -46,7 +50,16 @@ const { data: product } = await useFetch(
 );
 </script>
 
+<script>
+export default {};
+</script>
+
 <style scoped>
+.container-product {
+  max-width: 1380px;
+  width: 100%;
+  margin: 0 auto;
+}
 .page-product {
   /*background-color: #fff;*/
   /*padding-left: 20px;*/
@@ -54,7 +67,7 @@ const { data: product } = await useFetch(
   /*padding-bottom: 20px;*/
 }
 .product-desc {
-  background-color: #fff;
+  background-color: #f2f2f2;
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -63,9 +76,11 @@ const { data: product } = await useFetch(
   border-radius: 2px;
   display: flex;
   gap: 20px;
+  justify-content: space-between;
 }
 .product-desc .img {
   max-width: 330px;
+  min-width: 150px;
   width: 100%;
 }
 .product-desc img {
@@ -73,7 +88,9 @@ const { data: product } = await useFetch(
 }
 .product-desc .rigth {
   width: 100%;
+  max-width: 675px;
 }
+
 h1 {
   /* background-color: #fff;
     padding-left: 20px;
@@ -83,6 +100,8 @@ h1 {
     box-shadow: 0 2px 7px 0 rgb(0 0 0 / 4%);
     border-radius: 2px; */
   color: #414141;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .price_block {
@@ -112,5 +131,30 @@ h1 {
 .desc {
   font-size: 12.5px;
   color: #414141;
+}
+
+
+@media (max-width: 900px) {
+  .product-desc {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-desc .rigth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .product-desc .img {
+    order: 2;
+  }
+  .product-desc .rigth{
+    order: 3;
+  }
+}
+@media (max-width: 480px) {
+  .price_block{
+    justify-content: center;
+  }
 }
 </style>
