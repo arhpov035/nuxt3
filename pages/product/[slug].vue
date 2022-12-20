@@ -11,6 +11,7 @@
         </div>
         <div class="rigth">
           <h1>{{ product.name }}</h1>
+
           <div class="price_block">
             <div class="before item">
               <div class="currency">₽</div>
@@ -23,15 +24,18 @@
               <div class="currency">₽</div>
               <div class="info">
                 <div class="num">2150 руб/кг от 4 кг</div>
-                <div class="desc">декор и фигурки входят в цену</div>
+                <div class="desc">декор и фигурки входят в цену</div>
               </div>
             </div>
           </div>
+          <div class="select_weight">Выберите вес:</div>
           <Weight />
+          <div class="select_filling">Выберите начинку:</div>
           <fillingSlide/>
         </div>
         <sidebarLeft />
       </div>
+      <CardDetailDescription/>
     </div>
   </div>
 </template>
@@ -130,7 +134,13 @@ h1 {
   color: #414141;
 }
 
-
+.select_weight, .select_filling {
+  margin-bottom: 12px;
+font-weight: bold;
+}
+.select_filling {
+  margin-top: 15px;
+}
 @media (max-width: 900px) {
   .product-desc {
     flex-direction: column;

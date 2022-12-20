@@ -99,5 +99,11 @@ export default {
   .page_filling .item.two {
     display: block;
   }
+  .next {
+    right: 0;
+  }
+  .prev {
+    left: 0;
+  }
 }
 </style>
