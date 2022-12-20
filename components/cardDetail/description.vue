@@ -48,6 +48,10 @@
 </template>
 
 <style scoped>
+.page-description {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .page-description .params {
   max-width: 435px;
   width: 100%;
