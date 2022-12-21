@@ -319,6 +319,12 @@ h1 {
   .product-desc .rigth {
     order: 3;
   }
+  .sidebar_left {
+    max-width: 100%;
+    order: 1;
+    position: fixed;
+    top: 0;
+  }
 }
 @media (max-width: 480px) {
   .price_block {
