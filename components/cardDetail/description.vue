@@ -51,6 +51,8 @@
 .page-description {
   padding-left: 20px;
   padding-right: 20px;
+  margin-top: 20px;
+margin-bottom: 20px;
 }
 .page-description .params {
   max-width: 435px;
