@@ -3,16 +3,28 @@
     <nav>
       <ul>
         <li>
-          <div class="svg">
-            <SvgCakeMobMenu />
-          </div>
-          <a href="">Торты</a>
+          <NuxtLink class="link" :to="'/'">
+            <div class="svg">
+              <SvgCakeMobMenu />
+            </div>
+            <span>Главная</span></NuxtLink
+          >
         </li>
         <li>
-          <div class="svg">
-            <SvgCapcakeMobMenu />
-          </div>
-          <a href="">Капкейки</a>
+          <NuxtLink class="link" :to="''">
+            <div class="svg">
+              <SvgCakeMobMenu />
+            </div>
+            <span>Торты</span>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink class="link" :to="''">
+            <div class="svg">
+              <SvgCapcakeMobMenu />
+            </div>
+            <span>Капкейки</span></NuxtLink
+          >
         </li>
       </ul>
     </nav>
