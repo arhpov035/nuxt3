@@ -355,7 +355,7 @@ h1 {
     line-height: 1.2;
   }
   .sidebar_left > div {
-    width: 50%;
+    width: 60%;
   }
   .price_block {
     justify-content: center;
@@ -377,6 +377,8 @@ h1 {
     font-size: 0.85rem;
     height: 30px;
     margin-top: 0;
+    width: 40%;
+    max-width: 40%;
   }
 }
 </style>
