@@ -58,6 +58,7 @@ export default {
     addClass(i) {
       let elems = document.querySelectorAll(".weight .item");
       let price_order = document.querySelector("#price_order");
+      let numWeigth = document.querySelector("#numWeigth");
       let price_kg_before = 1400;
       let price_kg_after = 2150;
 
@@ -70,39 +71,51 @@ export default {
         switch (i) {
           case 0:
             price_order.innerHTML = price_kg_before * 2;
+            numWeigth.innerHTML = 2;
             break;
           case 1:
             price_order.innerHTML = price_kg_before * 2.5;
+            numWeigth.innerHTML = 2.5;
             break;
           case 2:
             price_order.innerHTML = price_kg_before * 3;
+            numWeigth.innerHTML = 3;
             break;
           case 3:
             price_order.innerHTML = price_kg_before * 4;
+            numWeigth.innerHTML = 4;
             break;
           case 4:
             price_order.innerHTML = price_kg_before * 5;
+            numWeigth.innerHTML = 5;
             break;
           case 5:
             price_order.innerHTML = price_kg_after * 6;
+            numWeigth.innerHTML = 6;
             break;
           case 6:
             price_order.innerHTML = price_kg_after * 7;
+            numWeigth.innerHTML = 7;
             break;
           case 7:
             price_order.innerHTML = price_kg_after * 8;
+            numWeigth.innerHTML = 8;
             break;
           case 8:
             price_order.innerHTML = price_kg_after * 9;
+            numWeigth.innerHTML = 9;
             break;
           case 9:
             price_order.innerHTML = price_kg_after * 10;
+            numWeigth.innerHTML = 10;
             break;
           case 10:
             price_order.innerHTML = price_kg_after * 11;
+            numWeigth.innerHTML = 11;
             break;
           default:
             price_order.innerHTML = price_kg_before * 2;
+            numWeigth.innerHTML = 2;
         }
       });
     },

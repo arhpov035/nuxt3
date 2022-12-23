@@ -39,7 +39,7 @@
         <div class="sidebar_left">
           <div class="sidebar_left_pr">
             <div class="price_pay_for">
-              Цена за торт весом <span class="numWeigth">2</span> кг
+              Цена за торт весом <span id="numWeigth">2</span> кг
             </div>
             <div class="sidebar_left_price">
               <span id="price_order">2800</span> <span class="сurrency">₽</span>
@@ -158,7 +158,7 @@ useHead({
 
 const isActive = ref(false);
 
-console.log(isActive.value);
+
 function showModelForm() {
   if (isActive.value) {
     isActive.value = false;
@@ -362,14 +362,16 @@ h1 {
     font-size: 0.85rem;
     margin-top: 0;
   }
-  .numWeigth {
-    font-size: 0.85rem;
+  #numWeigth {
+    font-size: 1rem;
   }
   #price_order {
-    font-size: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
   }
   .сurrency {
     font-size: 1rem;
+    font-weight: 600;
   }
   .order {
     font-size: 0.85rem;
