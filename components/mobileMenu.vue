@@ -5,7 +5,7 @@
         <li>
           <NuxtLink class="link" :to="'/'">
             <div class="svg">
-              <SvgCakeMobMenu />
+              <SvgHomeMobMenu/>
             </div>
             <span>Главная</span></NuxtLink
           >
