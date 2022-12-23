@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-container">
     <TheNavigation />
     <div class="container">
       <NuxtPage />
@@ -11,6 +11,9 @@
 
 
 <style scoped>
+.main-container {
+  margin-bottom: 50px;
+}
 .container {
   max-width: 1380px;
   width: 100%;
