@@ -30,7 +30,7 @@
 }
 .mobile-menu-fixed nav {
   display: flex;
-  background-color: ##f9fafb;
+  background-color: #f9fafb;
   justify-content: center;
   padding-top: 5px;
   padding-bottom: 4px;
