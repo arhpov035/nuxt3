@@ -144,7 +144,7 @@ const { data: product } = await useAsyncData("product", () =>
 //   "http://api.tortam.ru/api/v1/product/" + route.params.slug
 // );
 
-console.log(product.value.name)
+// console.log(product.value.name)
 
 
 useHead({
@@ -154,13 +154,16 @@ useHead({
   script: [{ children: "console.log('Hello world')" }],
 });
 
+const isActive  = ref(false)
+
+console.log(isActive.value)
 function showModelForm() {
-  if (this.isActive) {
-    this.isActive = false;
+  if (isActive.value) {
+    isActive.value = false;
   } else {
-    this.isActive = true;
+    isActive.value = true;
   }
-  console.log(this.isActive);
+  console.log(isActive.value);
 }
 </script>
 
