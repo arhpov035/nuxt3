@@ -3,7 +3,7 @@
     <Title>{{ product.name }}</Title>
     <Meta name="description" :content="product.description" />
   </Head> -->
-  <div class="page-product" >
+  <div class="page-product">
     <div class="container-product">
       <div class="product-desc">
         <div class="img">
@@ -37,12 +37,15 @@
           <CardDetailFillingSlide />
         </div>
         <div class="sidebar_left">
-          <div class="price_pay_for">
-            Цена за торт весом <span class="numWeigth">2</span> кг
+          <div class="sidebar_left_pr">
+            <div class="price_pay_for">
+              Цена за торт весом <span class="numWeigth">2</span> кг
+            </div>
+            <div class="sidebar_left_price">
+              <span id="price_order">2800</span> <span class="сurrency">₽</span>
+            </div>
           </div>
-          <div class="sidebar_left_price">
-            <span id="price_order">2800</span> <span class="сurrency">₽</span>
-          </div>
+
           <a type="button" class="order btn btn-blue" @click="showModelForm"
             >Заказать</a
           >
@@ -137,7 +140,7 @@
 const route = useRoute();
 
 const { data: product } = await useAsyncData("product", () =>
-  $fetch("http://api.tortam.ru/api/v1/product/"+route.params.slug)
+  $fetch("http://api.tortam.ru/api/v1/product/" + route.params.slug)
 );
 
 // const { data: product } = await useFetch(
@@ -146,7 +149,6 @@ const { data: product } = await useAsyncData("product", () =>
 
 // console.log(product.value.name)
 
-
 useHead({
   title: product.value.name,
   meta: [{ name: "description", content: product.value.description }],
@@ -154,9 +156,9 @@ useHead({
   script: [{ children: "console.log('Hello world')" }],
 });
 
-const isActive  = ref(false)
+const isActive = ref(false);
 
-console.log(isActive.value)
+console.log(isActive.value);
 function showModelForm() {
   if (isActive.value) {
     isActive.value = false;
@@ -174,9 +176,7 @@ export default {
       isActive: false,
     };
   },
-  methods: {
-    
-  },
+  methods: {},
 };
 </script>
 
@@ -278,7 +278,9 @@ h1 {
 .price_pay_for {
   margin-top: 15px;
 }
-
+.sidebar_left_pr {
+  text-align: center;
+}
 #price_order {
   font-size: 44px;
   font-weight: 500;
@@ -329,16 +331,52 @@ h1 {
     order: 3;
   }
   .sidebar_left {
+    max-width: 330px;
+    padding-bottom: 25px;
+  }
+}
+@media (max-width: 480px) {
+  .container-top {
+    display: none;
+  }
+  .sidebar_left {
     max-width: 100%;
     order: 1;
     position: fixed;
     top: 0;
     z-index: 6;
+    flex-direction: row;
+    gap: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #c3bfbf;
   }
-}
-@media (max-width: 480px) {
+  .sidebar_left_pr {
+    line-height: 1.2;
+  }
+  .sidebar_left > div {
+    width: 50%;
+  }
   .price_block {
     justify-content: center;
+  }
+  .price_pay_for {
+    font-size: 0.85rem;
+    margin-top: 0;
+  }
+  .numWeigth {
+    font-size: 0.85rem;
+  }
+  #price_order {
+    font-size: 1rem;
+  }
+  .сurrency {
+    font-size: 1rem;
+  }
+  .order {
+    font-size: 0.85rem;
+    height: 30px;
+    margin-top: 0;
   }
 }
 </style>
