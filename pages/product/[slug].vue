@@ -336,9 +336,7 @@ h1 {
   }
 }
 @media (max-width: 480px) {
-  .container-top {
-    display: none;
-  }
+  
   .sidebar_left {
     max-width: 100%;
     order: 1;

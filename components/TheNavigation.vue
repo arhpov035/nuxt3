@@ -111,4 +111,10 @@ ul li a {
     /* width: 50%; */
   }
 }
+
+@media(max-width: 480px){
+  .container-top {
+    display: none;
+  }
+}
 </style>
