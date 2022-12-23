@@ -1,9 +1,9 @@
 <template>
-  <Head>
+  <!-- <Head>
     <Title>{{ product.name }}</Title>
     <Meta name="description" :content="product.description" />
-  </Head>
-  <div class="page-product">
+  </Head> -->
+  <div class="page-product" >
     <div class="container-product">
       <div class="product-desc">
         <div class="img">
@@ -15,7 +15,6 @@
         </div>
         <div class="rigth">
           <h1 class="text-3xl font-bold">{{ product.name }}</h1>
-          <h1 class="text-3xl font-bold">{{ product.description }}</h1>
           <div class="price_block">
             <div class="before item">
               <div class="currency">₽</div>
@@ -49,8 +48,10 @@
           >
         </div>
       </div>
-      <CardDetailDescription />
-      <CardDetailFormComment />
+      <div class="container-bottom">
+        <CardDetailDescription />
+        <CardDetailFormComment />
+      </div>
     </div>
     <div
       class="modal-form-order relative z-10"
@@ -71,12 +72,12 @@
             class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
           >
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-              <div class="close" @click="showModelForm"><img class="" src="/images/svg/close.svg" alt="" /></div>
-              
+              <div class="close" @click="showModelForm">
+                <img class="" src="/images/svg/close.svg" alt="" />
+              </div>
+
               <div class="sm:flex sm:items-start">
-                <div
-                  class="form-container block p-6 rounded-lg bg-white"
-                >
+                <div class="form-container block p-6 rounded-lg bg-white">
                   <form>
                     <div class="form-group mb-6">
                       <input
@@ -135,20 +136,32 @@
 <script setup>
 const route = useRoute();
 
-// const { data: product } = await useAsyncData("count", () =>
-//   $fetch("http://api.tortam.ru/api/v1/product/"+route.params.slug)
-// );
-
-const { data: product } = await useFetch(
-  "http://api.tortam.ru/api/v1/product/" + route.params.slug
+const { data: product } = await useAsyncData("product", () =>
+  $fetch("http://api.tortam.ru/api/v1/product/"+route.params.slug)
 );
 
+// const { data: product } = await useFetch(
+//   "http://api.tortam.ru/api/v1/product/" + route.params.slug
+// );
+
+console.log(product.value.name)
+
+
 useHead({
-  title: "",
-  meta: [{ name: "description", content: "My amazing site." }],
+  title: product.value.name,
+  meta: [{ name: "description", content: product.value.description }],
   bodyAttrs: { class: "test" },
   script: [{ children: "console.log('Hello world')" }],
 });
+
+function showModelForm() {
+  if (this.isActive) {
+    this.isActive = false;
+  } else {
+    this.isActive = true;
+  }
+  console.log(this.isActive);
+}
 </script>
 
 <script>
@@ -159,14 +172,7 @@ export default {
     };
   },
   methods: {
-    showModelForm() {
-      if (this.isActive) {
-        this.isActive = false;
-      } else {
-        this.isActive = true;
-      }
-      console.log(this.isActive);
-    },
+    
   },
 };
 </script>
@@ -291,7 +297,7 @@ h1 {
   cursor: pointer;
 }
 .order:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .modal-form-order.active {
@@ -324,6 +330,7 @@ h1 {
     order: 1;
     position: fixed;
     top: 0;
+    z-index: 1;
   }
 }
 @media (max-width: 480px) {

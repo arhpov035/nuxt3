@@ -4,6 +4,8 @@
     <div class="container">
       <NuxtPage />
     </div>
+    <Footer />
+    <MobileMenu />
   </div>
 </template>
 
