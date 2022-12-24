@@ -1,167 +1,115 @@
 <template>
   <div class="weight">
-    <div class="items">
-      <div class="item active" @click="addClass(0)">
+    <div :class="['items tab_1', { active: priceWeightStore.tab_1 === 1 }]">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 2 }]"
+        @click="setActive(2)"
+      >
         <div class="num">2</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item" @click="addClass(1)">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 2.5 }]"
+        @click="setActive(2.5)"
+      >
         <div class="num">2.5</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item" @click="addClass(2)">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 3 }]"
+        @click="setActive(3)"
+      >
         <div class="num">3</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item four" @click="addClass(3)">
+      <div
+        :class="['item four', { active: priceWeightStore.activeWeight === 4 }]"
+        @click="setActive(4)"
+      >
         <div class="num">4</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item" @click="addClass(4)">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 5 }]"
+        @click="setActive(5)"
+      >
         <div class="num">5</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item" @click="addClass(5)">
+    </div>
+    <div :class="['items tab_2', { active: priceWeightStore.tab_2 === 1 }]">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 6 }]"
+        @click="setActive(6)"
+      >
         <div class="num">6</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item" @click="addClass(6)">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 7 }]"
+        @click="setActive(7)"
+      >
         <div class="num">7</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item" @click="addClass(7)">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 8 }]"
+        @click="setActive(8)"
+      >
         <div class="num">8</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item" @click="addClass(8)">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 9 }]"
+        @click="setActive(9)"
+      >
         <div class="num">9</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item" @click="addClass(9)">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 10 }]"
+        @click="setActive(10)"
+      >
         <div class="num">10</div>
         <div class="kg">кг</div>
       </div>
-      <div class="item" @click="addClass(10)">
+      <div
+        :class="['item', { active: priceWeightStore.activeWeight === 11 }]"
+        @click="setActive(11)"
+      >
         <div class="num">11</div>
         <div class="kg">кг</div>
       </div>
     </div>
-    <div class="next_back"  @click="showHideWeight">
+    <div :class="['next_back', { prev: priceWeightStore.nextBack === 1 }]" @click="priceWeightStore.prev()">
       <img src="/images/expand.svg" />
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  
-  methods: {
-    addClass(i) {
-      let elems = document.querySelectorAll(".weight .item");
-      let price_order = document.querySelector("#price_order");
-      let numWeigth = document.querySelector("#numWeigth");
-      let price_kg_before = 1400;
-      let price_kg_after = 2150;
-
-      [].forEach.call(elems, function (el, index) {
-        el.classList.remove("active");
-        if (i == index) {
-          el.classList.add("active");
-        }
-
-        switch (i) {
-          case 0:
-            price_order.innerHTML = price_kg_before * 2;
-            numWeigth.innerHTML = 2;
-            break;
-          case 1:
-            price_order.innerHTML = price_kg_before * 2.5;
-            numWeigth.innerHTML = 2.5;
-            break;
-          case 2:
-            price_order.innerHTML = price_kg_before * 3;
-            numWeigth.innerHTML = 3;
-            break;
-          case 3:
-            price_order.innerHTML = price_kg_before * 4;
-            numWeigth.innerHTML = 4;
-            break;
-          case 4:
-            price_order.innerHTML = price_kg_before * 5;
-            numWeigth.innerHTML = 5;
-            break;
-          case 5:
-            price_order.innerHTML = price_kg_after * 6;
-            numWeigth.innerHTML = 6;
-            break;
-          case 6:
-            price_order.innerHTML = price_kg_after * 7;
-            numWeigth.innerHTML = 7;
-            break;
-          case 7:
-            price_order.innerHTML = price_kg_after * 8;
-            numWeigth.innerHTML = 8;
-            break;
-          case 8:
-            price_order.innerHTML = price_kg_after * 9;
-            numWeigth.innerHTML = 9;
-            break;
-          case 9:
-            price_order.innerHTML = price_kg_after * 10;
-            numWeigth.innerHTML = 10;
-            break;
-          case 10:
-            price_order.innerHTML = price_kg_after * 11;
-            numWeigth.innerHTML = 11;
-            break;
-          default:
-            price_order.innerHTML = price_kg_before * 2;
-            numWeigth.innerHTML = 2;
-        }
-      });
-    },
-    showHideWeight() {
-      let elems = document.querySelectorAll(".weight .item");
-      let next_back_img = document.querySelector(".weight .next_back img");
-
-      if (next_back_img.classList.contains("rotate") == false) {
-        [].forEach.call(elems, function (el, index) {
-          if (index >= 5) {
-            el.style.display = "flex";
-            next_back_img.style.transform = `rotate(-${90}deg)`;
-          } else {
-            el.style.display = "none";
-          }
-        });
-        next_back_img.classList.add("rotate");
-      } else {
-        [].forEach.call(elems, function (el, index) {
-          if (index <= 4) {
-            el.style.display = "flex";
-            next_back_img.style.transform = `rotate(-${90}deg)`;
-          } else {
-            el.style.display = "none";
-          }
-        });
-        next_back_img.classList.remove("rotate");
-      }
-    },
-  },
+<script setup>
+const setActive = (id) => {
+  priceWeightStore.setActiveWeight(id);
 };
+
+const priceWeightStore = usePriceWeightStore();
 </script>
 
 <style scoped>
 .weight {
   display: flex;
 }
-.kg::before {
-  /* content: "кг"; */
-}
+
 .items {
   display: flex;
   gap: 5px;
+  display: none;
+}
+.items.active {
+  display: flex;
 }
 .item {
+  display: flex;
   background-color: #fff;
   width: 55px;
   height: 55px;
@@ -169,7 +117,6 @@ export default {
   align-items: center;
   flex-direction: column;
   border-radius: 4px;
-  display: none;
   line-height: 0.9;
   cursor: pointer;
   border: 2px solid #f2f2f2;
@@ -179,9 +126,6 @@ export default {
   width: 119px;
 }
 
-.item:nth-child(-n + 5) {
-  display: flex;
-}
 
 .item.active {
   border: 2px solid #009ce6;
@@ -209,6 +153,11 @@ export default {
 }
 .next_back img {
   transform: rotate(90deg);
+  width: 20px;
+}
+
+.next_back.prev img {
+  transform: rotate(-90deg);
   width: 20px;
 }
 

@@ -2,11 +2,11 @@
   <div class="sidebar_left">
     <div class="sidebar_left_pr">
       <div class="price_pay_for">
-        Цена за торт весом <span id="numWeigth">{{ priceStore.weight }}</span> кг
+        Цена за торт весом <span id="numWeigth">{{ priceWeightStore.weight }}</span> кг
       </div>
       <div class="sidebar_left_price">
         <div class="price_order">
-          <span id="price_order">{{ priceStore.price }}</span>
+          <span id="price_order">{{ priceWeightStore.price }}</span>
           <span class="сurrency">₽</span>
         </div>
       </div>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-    const priceStore = usePriceStore();
+const priceWeightStore = usePriceWeightStore();
 </script>
 
 <style scoped>
@@ -109,7 +109,6 @@
 }
 
 @media (max-width: 900px) {
-
   .sidebar_left {
     max-width: 330px;
     padding-bottom: 25px;

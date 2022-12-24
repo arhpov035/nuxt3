@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { useProductStore } from "@/stores/ProductStore";
+// import { useProductStore } from "@/stores/ProductStore";
 
 const productStore = useProductStore();
 </script>
