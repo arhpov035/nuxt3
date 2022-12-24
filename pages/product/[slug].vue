@@ -124,11 +124,6 @@
 </template>
 
 <script setup>
-
-const priceStore = usePriceStore();
-
-
-
 const route = useRoute();
 
 const { data: product } = await useAsyncData("product", () =>
