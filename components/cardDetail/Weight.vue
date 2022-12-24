@@ -46,7 +46,7 @@
         <div class="kg">кг</div>
       </div>
     </div>
-    <div class="next_back" @click="showHideWeight">
+    <div class="next_back"  @click="showHideWeight">
       <img src="/images/expand.svg" />
     </div>
   </div>
@@ -54,6 +54,7 @@
 
 <script>
 export default {
+  
   methods: {
     addClass(i) {
       let elems = document.querySelectorAll(".weight .item");

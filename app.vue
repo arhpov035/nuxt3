@@ -1,14 +1,16 @@
 <template>
-  <div class="main-container">
-    <TheNavigation />
-    <div class="container">
-      <NuxtPage />
+  <main>
+    <Header/>
+    <div class="main-container">
+      <TheNavigation />
+      <div class="container">
+        <NuxtPage />
+      </div>
+      <Footer />
+      <MobileMenu />
     </div>
-    <Footer />
-    <MobileMenu />
-  </div>
+  </main>
 </template>
-
 
 <style scoped>
 .main-container {

@@ -36,20 +36,7 @@
           <div class="select_filling">Выберите начинку:</div>
           <CardDetailFillingSlide />
         </div>
-        <div class="sidebar_left">
-          <div class="sidebar_left_pr">
-            <div class="price_pay_for">
-              Цена за торт весом <span id="numWeigth">2</span> кг
-            </div>
-            <div class="sidebar_left_price">
-              <span id="price_order">2800</span> <span class="сurrency">₽</span>
-            </div>
-          </div>
-
-          <a type="button" class="order btn btn-blue" @click="showModelForm"
-            >Заказать</a
-          >
-        </div>
+        <CardDetailSidebarLeft :price="price" />
       </div>
       <div class="container-bottom">
         <CardDetailDescription />
@@ -137,17 +124,16 @@
 </template>
 
 <script setup>
+
+const priceStore = usePriceStore();
+
+
+
 const route = useRoute();
 
 const { data: product } = await useAsyncData("product", () =>
   $fetch("http://api.tortam.ru/api/v1/product/" + route.params.slug)
 );
-
-// const { data: product } = await useFetch(
-//   "http://api.tortam.ru/api/v1/product/" + route.params.slug
-// );
-
-// console.log(product.value.name)
 
 useHead({
   title: product.value.name,
@@ -157,7 +143,6 @@ useHead({
 });
 
 const isActive = ref(false);
-
 
 function showModelForm() {
   if (isActive.value) {
@@ -185,12 +170,6 @@ export default {
   max-width: 1380px;
   width: 100%;
   margin: 0 auto;
-}
-.page-product {
-  /*background-color: #fff;*/
-  /*padding-left: 20px;*/
-  /*padding-right: 20px;*/
-  /*padding-bottom: 20px;*/
 }
 .product-desc {
   background-color: #f2f2f2;
@@ -265,46 +244,6 @@ h1 {
   width: 100%;
 }
 
-.sidebar_left {
-  background-color: #fff;
-  max-width: 285px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.price_pay_for {
-  margin-top: 15px;
-}
-.sidebar_left_pr {
-  text-align: center;
-}
-#price_order {
-  font-size: 44px;
-  font-weight: 500;
-}
-.сurrency {
-  font-size: 38px;
-  color: #198754;
-}
-.order {
-  background-color: #ffcc01;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 201px;
-  width: 100%;
-  height: 50px;
-  border-radius: 4px;
-  margin-top: 15px;
-  cursor: pointer;
-}
-.order:hover {
-  opacity: 0.8;
-}
-
 .modal-form-order.active {
   display: block;
 }
@@ -313,6 +252,9 @@ h1 {
   justify-content: flex-end;
   cursor: pointer;
 }
+
+
+
 @media (max-width: 900px) {
   .product-desc {
     flex-direction: column;
@@ -329,56 +271,6 @@ h1 {
   }
   .product-desc .rigth {
     order: 3;
-  }
-  .sidebar_left {
-    max-width: 330px;
-    padding-bottom: 25px;
-  }
-}
-@media (max-width: 480px) {
-  
-  .sidebar_left {
-    max-width: 100%;
-    order: 1;
-    position: fixed;
-    top: 0;
-    z-index: 6;
-    flex-direction: row;
-    gap: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #c3bfbf;
-  }
-  .sidebar_left_pr {
-    line-height: 1.2;
-  }
-  .sidebar_left > div {
-    width: 60%;
-  }
-  .price_block {
-    justify-content: center;
-  }
-  .price_pay_for {
-    font-size: 0.85rem;
-    margin-top: 0;
-  }
-  #numWeigth {
-    font-size: 1rem;
-  }
-  #price_order {
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-  .сurrency {
-    font-size: 1rem;
-    font-weight: 600;
-  }
-  .order {
-    font-size: 0.85rem;
-    height: 30px;
-    margin-top: 0;
-    width: 40%;
-    max-width: 40%;
   }
 }
 </style>

@@ -11,3 +11,14 @@
     width: 17px;
     fill: #3f3f46;
 }
+
+
+.collapse{
+    visibility: visible;
+}
+
+@media(max-width: 1024px) {
+    .collapse{
+        visibility: collapse;
+    }
+}
