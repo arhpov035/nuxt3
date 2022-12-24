@@ -2,7 +2,7 @@
   <main>
     <Header/>
     <div class="main-container">
-      <TheNavigation />
+      <!-- <TheNavigation /> -->
       <div class="container">
         <NuxtPage />
       </div>
