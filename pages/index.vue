@@ -11,9 +11,14 @@
 // import { useProductStore } from "@/stores/ProductStore";
 
 const productStore = useProductStore();
+
+
 </script>
 
-<style lang="css">
+<style scoped>
+header {
+    display: block;
+}
 .header {
   display: flex;
   justify-content: center;

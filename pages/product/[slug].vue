@@ -36,7 +36,7 @@
           <div class="select_filling">Выберите начинку:</div>
           <CardDetailFillingSlide />
         </div>
-        <CardDetailSidebarLeft :price="price" />
+        <CardDetailSidebarLeft />
       </div>
       <div class="container-bottom">
         <CardDetailDescription />
@@ -124,6 +124,14 @@
 </template>
 
 <script setup>
+
+const headerStore = useHeaderStore();
+
+onMounted(() => {
+  headerStore.getUrl;
+});
+
+
 const route = useRoute();
 
 const { data: product } = await useAsyncData("product", () =>
@@ -161,6 +169,9 @@ export default {
 </script>
 
 <style scoped>
+header {
+ display: none; 
+}
 .container-product {
   max-width: 1380px;
   width: 100%;
