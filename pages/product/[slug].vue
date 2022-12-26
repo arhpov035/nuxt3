@@ -44,8 +44,7 @@
       </div>
     </div>
     <div
-      class="modal-form-order relative z-10"
-      :class="{ active: isActive }"
+      :class="['modal-form-order relative z-10', { active: productStore.formActive === 1 }]"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -62,7 +61,7 @@
             class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
           >
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-              <div class="close" @click="showModelForm">
+              <div class="close" @click="productStore.closeForm">
                 <img class="" src="/images/svg/close.svg" alt="" />
               </div>
 
@@ -126,6 +125,7 @@
 <script setup>
 
 const headerStore = useHeaderStore();
+const productStore = useProductStore();
 
 onMounted(() => {
   headerStore.getUrl;
