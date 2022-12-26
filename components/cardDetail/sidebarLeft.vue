@@ -5,14 +5,14 @@
         Цена за торт весом <span id="numWeigth">{{ priceWeightStore.weight }}</span> кг
       </div>
       <div class="sidebar_left_price">
-        <div class="price_order">
-          <span id="price_order">{{ priceWeightStore.price }}</span>
-          <span class="сurrency">₽</span>
+        <div :class="['price_order', { active: priceWeightStore.activeAnimation === 1 }]">
+          <span id="price_order">{{ priceWeightStore.price }} </span>
+          <span class="сurrency"> ₽</span>
         </div>
       </div>
     </div>
 
-    <a type="button" class="order btn btn-blue" @click="showModelForm"
+    <a type="button" class="order btn btn-blue" @click="productStore.openForm"
       >Заказать</a
     >
   </div>
@@ -20,6 +20,8 @@
 
 <script setup>
 const priceWeightStore = usePriceWeightStore();
+const productStore = useProductStore();
+
 </script>
 
 <style scoped>

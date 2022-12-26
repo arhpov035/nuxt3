@@ -93,6 +93,13 @@ const setActive = (id) => {
 };
 
 const priceWeightStore = usePriceWeightStore();
+const props = defineProps({
+  price: {
+    type: String,
+    required: true,
+    default: 2500,
+  }
+});
 </script>
 
 <style scoped>
