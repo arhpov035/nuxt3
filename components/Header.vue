@@ -37,12 +37,12 @@
         >
           <ul class="navbar-nav mr-auto lg:flex lg:flex-row">
             <li class="nav-item">
-              <a
+              <NuxtLink
                 class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
-                href="#!"
+                :to="'/'"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
-                >Home</a
+                >Главная</NuxtLink
               >
             </li>
             <li class="nav-item">
@@ -81,6 +81,7 @@
 
     <!-- Background image -->
     <div
+      v-if="route.fullPath === '/'"
       :class="[
         'relative overflow-hidden bg-no-repeat bg-cover',
         { active: headerStore.displayBlock === 1 },
@@ -116,12 +117,8 @@
 </template>
 
 <script setup>
-// import { Search } from '~~/.nuxt/components';
-
+const route = useRoute();
+console.log(route.fullPath);
 const headerStore = useHeaderStore();
-// headerStore.getUrl;
 
-computed(() => {
-  headerStore.getUrl;
-});
 </script>

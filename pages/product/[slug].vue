@@ -127,6 +127,7 @@
 const headerStore = useHeaderStore();
 const productStore = useProductStore();
 
+
 onMounted(() => {
   headerStore.getUrl;
 });

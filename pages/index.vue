@@ -1,7 +1,7 @@
 <template>
   <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
     <Product
-        v-for="product of productStore.products"
+        v-for="product of products"
         :key="product.id"
         :product="product" />
   </div>
@@ -10,8 +10,15 @@
 <script setup>
 // import { useProductStore } from "@/stores/ProductStore";
 
-const productStore = useProductStore();
+// const productStore = useProductStore();
 
+const { data: products } = await useAsyncData("product", () =>
+  $fetch("http://api.tortam.ru/api/v1/products")
+);
+
+const route = useRoute();
+
+// console.log(route.fullPath);
 
 </script>
 

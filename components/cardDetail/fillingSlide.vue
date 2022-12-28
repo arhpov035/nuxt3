@@ -9,13 +9,13 @@
         />
       </div>
       <div class="item two">
-        <img class="prev" src="/images/svg/next_prev_slide.svg" alt="" />
+        <img class="prev" src="/images/svg/next_prev_slide.svg" alt="" @click="fillingStore.prevSlide" />
         <img
           class="flilslide"
           src="/images/filling/nachinka-pancho.jpg"
           alt=""
         />
-        <img class="next" src="/images/svg/next_prev_slide.svg" alt="" />
+        <img class="next" src="/images/svg/next_prev_slide.svg" alt="" @click="fillingStore.nextSlide" />
       </div>
       <div class="item free">
         <img
@@ -27,21 +27,21 @@
       <div class="item">
         <img
           class="flilslide"
-          src="/images/filling/nachinka-muss-chernaya-smorodina.jpg"
+          src="/images/filling/nachinka-napoleon.jpg"
           alt="smorodina"
         />
       </div>
       <div class="item">
         <img
           class="flilslide"
-          src="/images/filling/nachinka-pancho.jpg"
+          src="/images/filling/nachinka-krasnyj-barhat.jpg"
           alt=""
         />
       </div>
       <div class="item">
         <img
           class="flilslide"
-          src="/images/filling/nachinka-tri-shokolada.jpg"
+          src="/images/filling/nachinka-malinovyj-krem-chiz.jpg"
           alt=""
         />
       </div>
@@ -49,19 +49,23 @@
   </div>
 </template>
 
+<script setup>
+const fillingStore = useFillingStore();
+</script>
+
 <script>
-export default {
-  methods: {
-    imgSlideWeightIndex() {
-      let cont = document.getElementById("swip");
-      cont.onclick = function (element) {
-        var e = element.target.id;
-        var e = element.target.alt;
-        console.log(e);
-      };
-    },
-  },
-};
+// export default {
+//   methods: {
+//     imgSlideWeightIndex() {
+//       let cont = document.getElementById("swip");
+//       cont.onclick = function (element) {
+//         var e = element.target.id;
+//         var e = element.target.alt;
+//         console.log(e);
+//       };
+//     },
+//   },
+// };
 </script>
 
 <style scoped>
