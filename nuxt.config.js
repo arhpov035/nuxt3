@@ -50,6 +50,7 @@ export default {
   },
 
   build: {
+    transpile: ['yup', 'lodash', '@vee-validate/rules'],
     extend(config, ctx) {
       if (ctx.dev && ctx.isClient) {
         config.module.rules.push({

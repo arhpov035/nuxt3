@@ -44,7 +44,10 @@
       </div>
     </div>
     <div
-      :class="['modal-form-order relative z-10', { active: productStore.formActive === 1 }]"
+      :class="[
+        'modal-form-order relative z-10',
+        { active: productStore.formActive === 1 },
+      ]"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -67,14 +70,17 @@
 
               <div class="sm:flex sm:items-start">
                 <div class="form-container block p-6 rounded-lg bg-white">
-                  <form>
+                  <form @submit.prevent="handleSubmit">
                     <div class="form-group mb-6">
                       <input
+                        v-model="message"
                         type="text"
                         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         id="exampleInput7"
+                        name="name"
                         placeholder="Ваше имя"
                       />
+                      <p>{{ message }}</p>
                     </div>
                     <div class="form-group mb-6">
                       <input
@@ -112,6 +118,7 @@
                       Заказать
                     </button>
                   </form>
+
                 </div>
               </div>
             </div>
@@ -123,15 +130,31 @@
 </template>
 
 <script setup>
+// import { log } from "console";
+import { ref } from "vue";
+
+const isRequired = (value) => {
+  if (value && value.trim()) {
+    return true;
+  }
+  return "This is required right now!";
+};
+
+const handleSubmit = (values, actions) => {
+  console.log(4444)
+  console.log(values);
+  console.log(actions);
+  console.log(5555)
+};
+
+const message = ref("");
 
 const headerStore = useHeaderStore();
 const productStore = useProductStore();
 
-
 onMounted(() => {
   headerStore.getUrl;
 });
-
 
 const route = useRoute();
 
@@ -156,22 +179,40 @@ function showModelForm() {
   }
   console.log(isActive.value);
 }
+
+async function submitHandler() {
+  const { data: res } = await useAsyncData("product", () =>
+    $fetch("http://api.tortam.ru/api/v1/mail?tortam=tortam")
+  );
+  // console.log(message.value);
+  console.log(5555);
+  // console.log(res.value.tortam);
+}
 </script>
 
 <script>
-export default {
-  data() {
-    return {
-      isActive: false,
-    };
-  },
-  methods: {},
-};
+// import Vue from "vue";
+// import Vuelidate from "vuelidate";
+// import { email, required, minLength } from "vuelidate/lib/validators";
+
+// export default {
+//   name: "login",
+//   data() {
+//     return {
+//       message: ''
+//     }
+//   },
+//   methods: {
+//     submitHandler() {
+//       console.log(this.message);
+//     }
+//   }
+// };
 </script>
 
 <style scoped>
 header {
- display: none; 
+  display: none;
 }
 .container-product {
   max-width: 1380px;
@@ -259,8 +300,6 @@ h1 {
   justify-content: flex-end;
   cursor: pointer;
 }
-
-
 
 @media (max-width: 900px) {
   .product-desc {
