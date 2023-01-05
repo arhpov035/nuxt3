@@ -1,8 +1,4 @@
 <template>
-  <!-- <Head>
-    <Title>{{ product.name }}</Title>
-    <Meta name="description" :content="product.description" />
-  </Head> -->
   <div class="page-product">
     <div class="container-product">
       <div class="product-desc">
@@ -44,7 +40,10 @@
       </div>
     </div>
     <div
-      :class="['modal-form-order relative z-10', { active: productStore.formActive === 1 }]"
+      :class="[
+        'modal-form-order relative z-10',
+        { active: productStore.formActive === 1 },
+      ]"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -67,7 +66,23 @@
 
               <div class="sm:flex sm:items-start">
                 <div class="form-container block p-6 rounded-lg bg-white">
-                  <form>
+                  <form @submit.prevent="handleSubmit">
+                    <div class="form-group mb-6">
+                      <input
+                        type="text"
+                        id="exampleInput7"
+                        :value="product.name"
+                        readonly
+                      />
+                    </div>
+                    <div class="form-group mb-6">
+                      <input
+                        type="text"
+                        id="exampleInput7"
+                        :value="productStore.formFillingName"
+                        readonly
+                      />
+                    </div>
                     <div class="form-group mb-6">
                       <input
                         type="text"
@@ -78,20 +93,26 @@
                     </div>
                     <div class="form-group mb-6">
                       <input
-                        type="email"
+                        v-model="email"
+                        type="text"
                         class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id="exampleInput8"
+                        id="emailOrder"
+                        name="emailOrder"
                         placeholder="Email"
                       />
+                      <p :class="['error', { active: emailErr }]">
+                        Введите корректный email
+                      </p>
                     </div>
                     <div class="form-group mb-6">
                       <input
-                        type="phone"
-                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id="exampleInput8"
-                        placeholder="Телефон"
+                        type="text"
+                        class="mask-phone form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        id="phoneOrder"
+                        name="phoneOrder"
                       />
                     </div>
+                    <div class="form-group mb-6"></div>
                     <div class="form-group form-check text-center mb-6">
                       <input
                         type="checkbox"
@@ -104,6 +125,25 @@
                         for="exampleCheck87"
                         >Send me a copy of this message</label
                       >
+                    </div>
+                    <div class="datepicker relative form-floating mb-3 xl:w-96">
+                      <input
+                        type="text"
+                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none form-icon-trailing"
+                        placeholder="Select a date"
+                      />
+                      <label for="floatingInput" class="text-gray-700"
+                        >Select a date</label
+                      >
+
+                      <button
+                        id="datepicker-toggle-380555"
+                        type="button"
+                        class="datepicker-toggle-button"
+                        data-mdb-toggle="datepicker"
+                      >
+                        <i class="far fa-calendar datepicker-toggle-icon"></i>
+                      </button>
                     </div>
                     <button
                       type="submit"
@@ -124,16 +164,14 @@
 
 <script setup>
 
-const headerStore = useHeaderStore();
+
+
+const priceWeightStore = usePriceWeightStore();
 const productStore = useProductStore();
-
-
-onMounted(() => {
-  headerStore.getUrl;
-});
-
-
 const route = useRoute();
+
+const email = ref();
+const emailErr = ref(false);
 
 const { data: product } = await useAsyncData("product", () =>
   $fetch("http://api.tortam.ru/api/v1/product/" + route.params.slug)
@@ -146,32 +184,40 @@ useHead({
   script: [{ children: "console.log('Hello world')" }],
 });
 
-const isActive = ref(false);
-
-function showModelForm() {
-  if (isActive.value) {
-    isActive.value = false;
+const handleSubmit = () => {
+  const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+  if (!regex.test(email.value)) {
+    emailErr.value = true;
+    return;
   } else {
-    isActive.value = true;
+    emailErr.value = false;
   }
-  console.log(isActive.value);
-}
-</script>
-
-<script>
-export default {
-  data() {
-    return {
-      isActive: false,
-    };
-  },
-  methods: {},
 };
+
+onMounted(() => {
+  if (localStorage.prevUrl != route.fullPath) {
+    localStorage.prevUrl = route.fullPath;
+    localStorage.activeWeight = 2;
+    priceWeightStore.activeWeight = 2;
+    priceWeightStore.weight = 2;
+    priceWeightStore.price = 2800;
+  } else {
+    localStorage.prevUrl = route.fullPath;
+  }
+});
 </script>
 
 <style scoped>
+.error {
+  display: none;
+}
+.error.active {
+  display: block;
+  border: 1px solid red;
+  color: red;
+}
 header {
- display: none; 
+  display: none;
 }
 .container-product {
   max-width: 1380px;
@@ -259,8 +305,6 @@ h1 {
   justify-content: flex-end;
   cursor: pointer;
 }
-
-
 
 @media (max-width: 900px) {
   .product-desc {

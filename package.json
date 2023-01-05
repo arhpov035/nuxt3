@@ -22,6 +22,11 @@
     "@vueuse/core": "^9.9.0",
     "pinia": "^2.0.28",
     "swiper": "^8.4.5",
-    "uuid": "^9.0.0"
+    "tw-elements": "^1.0.0-alpha13",
+    "uuid": "^9.0.0",
+    "vee-validate": "^4.7.3",
+    "vue-input-facade": "^2.0.1",
+    "vue-phone-mask-input": "^1.1.11",
+    "yup": "^0.32.11"
   }
 }

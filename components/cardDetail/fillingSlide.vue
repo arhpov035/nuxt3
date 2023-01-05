@@ -9,13 +9,23 @@
         />
       </div>
       <div class="item two">
-        <img class="prev" src="/images/svg/next_prev_slide.svg" alt="" @click="fillingStore.prevSlide" />
+        <img
+          class="prev"
+          src="/images/svg/next_prev_slide.svg"
+          alt=""
+          @click="fillingStore.prevSlide"
+        />
         <img
           class="flilslide"
           src="/images/filling/nachinka-pancho.jpg"
           alt=""
         />
-        <img class="next" src="/images/svg/next_prev_slide.svg" alt="" @click="fillingStore.nextSlide" />
+        <img
+          class="next"
+          src="/images/svg/next_prev_slide.svg"
+          alt=""
+          @click="fillingStore.nextSlide"
+        />
       </div>
       <div class="item free">
         <img
@@ -53,26 +63,12 @@
 const fillingStore = useFillingStore();
 </script>
 
-<script>
-// export default {
-//   methods: {
-//     imgSlideWeightIndex() {
-//       let cont = document.getElementById("swip");
-//       cont.onclick = function (element) {
-//         var e = element.target.id;
-//         var e = element.target.alt;
-//         console.log(e);
-//       };
-//     },
-//   },
-// };
-</script>
-
 <style scoped>
 .prev,
 .next {
   width: 30px;
   position: absolute;
+  z-index: 1;
 }
 .prev {
   top: calc(50% - 15px);
@@ -88,13 +84,32 @@ const fillingStore = useFillingStore();
   gap: 10px;
 }
 .page_filling .item {
+  width: 100%;
   display: none;
+}
+.page_filling .item img{
+  border-radius: 5px;
 }
 .page_filling .item.two {
   position: relative;
 }
 .page_filling .item:nth-child(-n + 3) {
   display: block;
+}
+
+.page_filling .item.first,
+.page_filling .item.free {
+  width: 80%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
+}
+.page_filling .item.first img,
+.page_filling .item.free img {
+  width: 100%;
+  height: auto;
+  margin: 0 0 0 -5px;
 }
 @media (max-width: 480px) {
   .page_filling .items .item {
