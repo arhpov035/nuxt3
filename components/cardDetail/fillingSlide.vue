@@ -1,78 +1,72 @@
 <template>
-  <div class="page_filling">
-    <div class="items">
-      <div class="item first">
-        <img
-          class="flilslide"
-          src="/images/filling/nachinka-muss-chernaya-smorodina.jpg"
-          alt="smorodina"
-        />
-      </div>
-      <div class="item two">
-        <img class="prev" src="/images/svg/next_prev_slide.svg" alt="" @click="fillingStore.prevSlide" />
-        <img
-          class="flilslide"
-          src="/images/filling/nachinka-pancho.jpg"
-          alt=""
-        />
-        <img class="next" src="/images/svg/next_prev_slide.svg" alt="" @click="fillingStore.nextSlide" />
-      </div>
-      <div class="item free">
-        <img
-          class="flilslide"
-          src="/images/filling/nachinka-tri-shokolada.jpg"
-          alt=""
-        />
-      </div>
-      <div class="item">
-        <img
-          class="flilslide"
-          src="/images/filling/nachinka-napoleon.jpg"
-          alt="smorodina"
-        />
-      </div>
-      <div class="item">
-        <img
-          class="flilslide"
-          src="/images/filling/nachinka-krasnyj-barhat.jpg"
-          alt=""
-        />
-      </div>
-      <div class="item">
-        <img
-          class="flilslide"
-          src="/images/filling/nachinka-malinovyj-krem-chiz.jpg"
-          alt=""
-        />
-      </div>
-    </div>
+  <div class="item first" v-if="index == 0">
+    <img
+      class="flilslide"
+      :src="`/images/filling/${filling.image}`"
+      :alt="filling.name"
+    />
+  </div>
+  <div class="item two" v-else-if="index == 1">
+    <img
+      class="prev"
+      src="/images/svg/next_prev_slide.svg"
+      alt=""
+      @click="fillingStore.prevSlide"
+    />
+    <img
+      class="flilslide"
+      :src="`/images/filling/${filling.image}`"
+      :alt="filling.name"
+    />
+    <img
+      class="next"
+      src="/images/svg/next_prev_slide.svg"
+      alt=""
+      @click="fillingStore.nextSlide"
+    />
+    <div class="name">{{ filling.name }}</div>
+  </div>
+  <div class="item free" v-else-if="index == 2">
+    <img
+      class="flilslide"
+      :src="`/images/filling/${filling.image}`"
+      :alt="filling.name"
+    />
+  </div>
+  <div class="item" v-else>
+    <img
+      class="flilslide"
+      :src="`/images/filling/${filling.image}`"
+      :alt="filling.name"
+    />
   </div>
 </template>
 
 <script setup>
 const fillingStore = useFillingStore();
-</script>
 
-<script>
-// export default {
-//   methods: {
-//     imgSlideWeightIndex() {
-//       let cont = document.getElementById("swip");
-//       cont.onclick = function (element) {
-//         var e = element.target.id;
-//         var e = element.target.alt;
-//         console.log(e);
-//       };
-//     },
-//   },
-// };
+// получаем продукт на который нажали
+//  @click="searchStore.addBasketProduct(product)"
+
+// const productStore = useProductStore();
+const searchStore = useSearchStore();
+
+const props = defineProps({
+  filling: {
+    type: Object,
+    required: true,
+    default: () => {},
+  },
+  index: "",
+});
 </script>
 
 <style scoped>
-.prev,
+/*.prev,
 .next {
   width: 30px;
   position: absolute;
+  z-index: 1;
 }
 .prev {
   top: calc(50% - 15px);
@@ -88,7 +82,11 @@ const fillingStore = useFillingStore();
   gap: 10px;
 }
 .page_filling .item {
+  width: 100%;
   display: none;
+}
+.page_filling .item img {
+  border-radius: 5px;
 }
 .page_filling .item.two {
   position: relative;
@@ -96,18 +94,19 @@ const fillingStore = useFillingStore();
 .page_filling .item:nth-child(-n + 3) {
   display: block;
 }
-@media (max-width: 480px) {
-  .page_filling .items .item {
-    display: none;
-  }
-  .page_filling .item.two {
-    display: block;
-  }
-  .next {
-    right: 0;
-  }
-  .prev {
-    left: 0;
-  }
+
+.page_filling .item.first,
+.page_filling .item.free {
+  width: 80%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
 }
+.page_filling .item.first img,
+.page_filling .item.free img {
+  width: 100%;
+  height: auto;
+  margin: 0 0 0 -5px;
+}*/
 </style>

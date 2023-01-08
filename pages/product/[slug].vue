@@ -1,8 +1,4 @@
 <template>
-  <!-- <Head>
-    <Title>{{ product.name }}</Title>
-    <Meta name="description" :content="product.description" />
-  </Head> -->
   <div class="page-product">
     <div class="container-product">
       <div class="product-desc">
@@ -34,7 +30,16 @@
           <div class="select_weight">Выберите вес:</div>
           <CardDetailWeight />
           <div class="select_filling">Выберите начинку:</div>
-          <CardDetailFillingSlide />
+          <div class="page_filling">
+            <div class="items">
+              <CardDetailFillingSlide
+                v-for="(filling, index) of fillings"
+                :key="filling.id"
+                :filling="filling"
+                :index="index"
+              />
+            </div>
+          </div>
         </div>
         <CardDetailSidebarLeft />
       </div>
@@ -43,77 +48,75 @@
         <CardDetailFormComment />
       </div>
     </div>
+    <!-- Modal -->
     <div
-      :class="['modal-form-order relative z-10', { active: productStore.formActive === 1 }]"
-      aria-labelledby="modal-title"
-      role="dialog"
-      aria-modal="true"
+      class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+      id="orderModal"
+      tabindex="-1"
+      aria-labelledby="orderModalLabel"
+      aria-hidden="true"
     >
-      <div
-        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-      ></div>
-
-      <div class="fixed inset-0 z-10 overflow-y-auto">
+      <div class="modal-dialog relative w-auto pointer-events-none">
         <div
-          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+          class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current"
         >
           <div
-            class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+            class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md"
           >
-            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-              <div class="close" @click="productStore.closeForm">
-                <img class="" src="/images/svg/close.svg" alt="" />
-              </div>
-
-              <div class="sm:flex sm:items-start">
-                <div class="form-container block p-6 rounded-lg bg-white">
-                  <form>
-                    <div class="form-group mb-6">
-                      <input
-                        type="text"
-                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id="exampleInput7"
-                        placeholder="Ваше имя"
-                      />
-                    </div>
-                    <div class="form-group mb-6">
-                      <input
-                        type="email"
-                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id="exampleInput8"
-                        placeholder="Email"
-                      />
-                    </div>
-                    <div class="form-group mb-6">
-                      <input
-                        type="phone"
-                        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id="exampleInput8"
-                        placeholder="Телефон"
-                      />
-                    </div>
-                    <div class="form-group form-check text-center mb-6">
-                      <input
-                        type="checkbox"
-                        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
-                        id="exampleCheck87"
-                        checked
-                      />
-                      <label
-                        class="form-check-label inline-block text-gray-800"
-                        for="exampleCheck87"
-                        >Send me a copy of this message</label
-                      >
-                    </div>
-                    <button
-                      type="submit"
-                      class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                    >
-                      Заказать
-                    </button>
-                  </form>
+            <h5
+              class="text-xl font-medium leading-normal text-gray-800"
+              id="orderModalLabel"
+            >
+              Оформление заказа
+            </h5>
+            <button
+              type="button"
+              class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body relative p-4">
+            <div class="block p-6 rounded-lg bg-white max-w-md">
+              <form>
+                <div class="form-group mb-4">
+                  <input
+                    type="text"
+                    class="mask-email form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Ваш e-mail"
+                  />
                 </div>
-              </div>
+                <div class="form-group mb-4">
+                  <input
+                    type="text"
+                    class="mask-phone form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="+7 (999) 999-99-99"
+                  />
+                </div>
+                <div class="form-group mb-4">
+                  <input
+                    id="start"
+                    type="date"
+                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    min=""
+                  />
+                </div>
+                <div class="form-group form-check text-center mb-2">
+                  <label
+                    class="form-check-label inline-block text-gray-800 text-sm"
+                    for="exampleCheck25"
+                    >Нажимая на кнопку "Отправить", я даю согласие на обработку
+                    персональных данных</label
+                  >
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                >
+                  Оформить
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -123,55 +126,66 @@
 </template>
 
 <script setup>
-
-const headerStore = useHeaderStore();
+const priceWeightStore = usePriceWeightStore();
 const productStore = useProductStore();
-
-
-onMounted(() => {
-  headerStore.getUrl;
-});
-
-
 const route = useRoute();
+
+const email = ref();
+const emailErr = ref(false);
 
 const { data: product } = await useAsyncData("product", () =>
   $fetch("http://api.tortam.ru/api/v1/product/" + route.params.slug)
+);
+
+const { data: fillings } = await useAsyncData("fillings", () =>
+  $fetch("http://api.tortam.ru/api/v1/fillings")
 );
 
 useHead({
   title: product.value.name,
   meta: [{ name: "description", content: product.value.description }],
   bodyAttrs: { class: "test" },
-  script: [{ children: "console.log('Hello world')" }],
+  script: [
+    {
+      // src: "/js/tailwind.js",
+    },
+  ],
 });
 
-const isActive = ref(false);
-
-function showModelForm() {
-  if (isActive.value) {
-    isActive.value = false;
+const handleSubmit = () => {
+  const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+  if (!regex.test(email.value)) {
+    emailErr.value = true;
+    return;
   } else {
-    isActive.value = true;
+    emailErr.value = false;
   }
-  console.log(isActive.value);
-}
-</script>
-
-<script>
-export default {
-  data() {
-    return {
-      isActive: false,
-    };
-  },
-  methods: {},
 };
+
+onMounted(() => {
+  if (localStorage.prevUrl != route.fullPath) {
+    localStorage.prevUrl = route.fullPath;
+    localStorage.activeWeight = 2;
+    priceWeightStore.activeWeight = 2;
+    priceWeightStore.weight = 2;
+    priceWeightStore.price = 2800;
+  } else {
+    localStorage.prevUrl = route.fullPath;
+  }
+});
 </script>
 
 <style scoped>
+.error {
+  display: none;
+}
+.error.active {
+  display: block;
+  border: 1px solid red;
+  color: red;
+}
 header {
- display: none; 
+  display: none;
 }
 .container-product {
   max-width: 1380px;
@@ -262,6 +276,47 @@ h1 {
 
 
 
+
+
+
+
+
+.page_filling .items {
+  display: flex;
+  gap: 10px;
+}
+.page_filling .item {
+  width: 100%;
+  display: none;
+}
+.page_filling .item img {
+  border-radius: 5px;
+}
+.page_filling .item {
+  position: relative;
+}
+
+
+.page_filling .item:nth-child(-n + 3) {
+  display: block;
+}
+
+.page_filling .item.first,
+.page_filling .item.free {
+  width: 80%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
+}
+.page_filling .item.first img,
+.page_filling .item.free img {
+  width: 100%;
+  height: auto;
+  margin: 0 0 0 -5px;
+}
+
+
 @media (max-width: 900px) {
   .product-desc {
     flex-direction: column;
@@ -278,6 +333,15 @@ h1 {
   }
   .product-desc .rigth {
     order: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .page_filling .items .item {
+    display: none;
+  }
+  .page_filling .item.two {
+    display: block;
   }
 }
 </style>

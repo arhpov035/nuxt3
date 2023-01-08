@@ -2,26 +2,37 @@
   <div class="sidebar_left">
     <div class="sidebar_left_pr">
       <div class="price_pay_for">
-        Цена за торт весом <span id="numWeigth">{{ priceWeightStore.weight }}</span> кг
+        Цена за торт весом
+        <span id="numWeigth">{{ priceWeightStore.weight }}</span> кг
       </div>
       <div class="sidebar_left_price">
-        <div :class="['price_order', { active: priceWeightStore.activeAnimation === 1 }]">
+        <div
+          :class="[
+            'price_order',
+            { active: priceWeightStore.activeAnimation === 1 },
+          ]"
+        >
           <span id="price_order">{{ priceWeightStore.price }} </span>
           <span class="сurrency"> ₽</span>
         </div>
       </div>
     </div>
 
-    <a type="button" class="order btn btn-blue" @click="productStore.openForm"
-      >Заказать</a
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="order btn btn-blue"
+      data-bs-toggle="modal"
+      data-bs-target="#orderModal"
     >
+    Заказать
+    </button>
   </div>
 </template>
 
 <script setup>
 const priceWeightStore = usePriceWeightStore();
 const productStore = useProductStore();
-
 </script>
 
 <style scoped>

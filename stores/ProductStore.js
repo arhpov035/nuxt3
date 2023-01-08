@@ -9,9 +9,12 @@ export const useProductStore = defineStore("productStore", () => {
   const products = ref([]);
   // const products = ref(data);
   const formActive = ref(0);
+  const formFillingName = ref('formFillingName');
 
   const openForm = () => {
     formActive.value = 1;
+    formFillingName.value = document.querySelector(".item.two .flilslide").getAttribute("src");
+    console.log(formFillingName.value)
   };
 
   const closeForm = async () => {
@@ -26,6 +29,7 @@ export const useProductStore = defineStore("productStore", () => {
   return {
     products,
     formActive,
+    formFillingName,
     openForm,
     closeForm,
   };

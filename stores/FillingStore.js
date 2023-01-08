@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useFillingStore = defineStore("fillingStore", () => {
+
   const nextSlide = () => {
     const slideFilling = document.querySelectorAll(".page_filling .flilslide");
     const arrSrc = [];
@@ -18,6 +19,7 @@ export const useFillingStore = defineStore("fillingStore", () => {
     });
     
   };
+  
   const prevSlide = () => {
     const slideFilling = document.querySelectorAll(".page_filling .flilslide");
     const arrSrc = [];
