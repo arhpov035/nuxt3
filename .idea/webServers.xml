@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="589bc703-019f-4af1-a78c-845abe3df85a" name="tortam">
-        <fileTransfer rootFolder="/root" accessType="SFTP" host="45.84.224.67" port="22" sshConfigId="1224ff9a-61c4-4e6a-96e7-d3f17f664643" sshConfig="root@45.84.224.67:22 password">
+        <fileTransfer rootFolder="/root/tortam/tortam.ru" accessType="SFTP" host="45.84.224.67" port="22" sshConfigId="1224ff9a-61c4-4e6a-96e7-d3f17f664643" sshConfig="root@45.84.224.67:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

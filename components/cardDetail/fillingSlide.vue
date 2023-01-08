@@ -24,7 +24,7 @@
       alt=""
       @click="fillingStore.nextSlide"
     />
-    <div class="name">{{ filling.name }}</div>
+    <div id="fillingName" class="name">{{ filling.name }}</div>
   </div>
   <div class="item free" v-else-if="index == 2">
     <img
