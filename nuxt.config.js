@@ -18,6 +18,11 @@ export default {
       ],
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "stylesheet", type: "text/css", href: "/css/main.css" },
+        { rel: "stylesheet", type: "text/css", href: "/css/tailwind.all.min.css" },
+        { rel: "stylesheet", type: "text/css", href: "/css/output.css" },
+        { rel: "stylesheet", type: "text/css", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" },
+        { rel: "stylesheet", type: "text/css", href: "https://use.fontawesome.com/releases/v5.6.1/css/all.css", integrity: "sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP", crossorigin: "anonymous" },
       ],
       script: [
         {
@@ -30,9 +35,13 @@ export default {
           src: "/js/jquery.maskedinput.js",
         },
         // {
-        //   src: "https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js",
-        //   body: true
+        //   src: "/js/datepicker-ru.js",
+        //   body: true,
         // },
+        {
+          src: "/js/tailwind.js",
+          body: true,
+        },
         {
           src: "/js/main.js",
         },
@@ -48,7 +57,10 @@ export default {
   imports: {
     dirs: ["stores"],
   },
-  css: ["@/assets/css/main.css"],
+  css: [
+    // "@/assets/css/main.css",
+    // "@/assets/css/output.css"
+  ],
 
   plugins: [],
 
@@ -58,7 +70,7 @@ export default {
 
   modules: [
     // [`@twicpics/components/nuxt3`],
-    "@nuxtjs/tailwindcss",
+    // "@nuxtjs/tailwindcss",
     [
       "@pinia/nuxt",
       "@nuxtjs/axios",

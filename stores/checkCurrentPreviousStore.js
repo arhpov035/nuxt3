@@ -9,8 +9,6 @@ export const useCheckCurrentPreviousStore = defineStore(
     const prevUrl = ref("");
     const route = useRoute();
 
-
-
     return {
       arrUrl,
       prevUrl,
