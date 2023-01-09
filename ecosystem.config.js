@@ -1,14 +1,10 @@
 module.exports = {
-  apps : [
+  apps: [
     {
-      name: "nuxt-dev",
-      script: "npm",
-      args: "run dev"
-    },
-    {
-      name: "nuxt-prod",
-      script: "npm",
-      args: "run start"
+      name: 'tortam',
+      exec_mode: 'cluster',
+      instances: 'max',
+      script: './.output/server/index.mjs'
     }
   ]
 }

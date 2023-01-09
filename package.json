@@ -19,6 +19,7 @@
     "@pinia/nuxt": "^0.4.6",
     "@vueuse/core": "^9.9.0",
     "pinia": "^2.0.28",
+    "redirect-ssl": "^3.0.0",
     "swiper": "^8.4.5",
     "tw-elements": "^1.0.0-alpha13",
     "uuid": "^9.0.0",
