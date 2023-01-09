@@ -134,11 +134,11 @@ const email = ref();
 const emailErr = ref(false);
 
 const { data: product } = await useAsyncData("product", () =>
-  $fetch("http://api.tortam.ru/api/v1/product/" + route.params.slug)
+  $fetch("https://api.tortam.ru/api/v1/product/" + route.params.slug)
 );
 
 const { data: fillings } = await useAsyncData("fillings", () =>
-  $fetch("http://api.tortam.ru/api/v1/fillings")
+  $fetch("https://api.tortam.ru/api/v1/fillings")
 );
 
 useHead({
