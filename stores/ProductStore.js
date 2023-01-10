@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed, watch } from "vue";
-const url = "http://api.tortam.ru/api/v1/products";
+const url = "https://api.tortam.ru/api/v1/products";
 
 // const res = await fetch(`${url}`);
 // const data = await res.json();

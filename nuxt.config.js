@@ -1,4 +1,9 @@
 export default {
+  runtimeConfig: {
+    public: {
+      // baseURL: process.env.BASE_URL || 'https://api.tortam.ru/api/v1',
+    },
+  },
   app: {
     head: {
       title: "Торты 🎂 и капкейки на заказ в Тамбове",
@@ -81,7 +86,7 @@ export default {
     ],
   ],
   axios: {
-    baseURL: "http://api.nuxt.local/api",
+    // baseURL: "https://api.tortam.ru/api/v1",
     credentials: true,
     common: {
       Accept: "application/json",

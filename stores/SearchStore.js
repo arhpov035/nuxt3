@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-const url = "http://api.tortam.ru/api/v1/products?";
+const url = "https://api.tortam.ru/api/v1/products?";
 
 
 export const useSearchStore = defineStore("searchStore", () => {
