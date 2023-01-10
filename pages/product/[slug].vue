@@ -78,23 +78,41 @@
           </div>
           <div class="modal-body relative p-4">
             <div class="block p-6 rounded-lg bg-white max-w-md">
-              <form>
+              <form @submit.prevent="handleSubmit">
+                <input v-model="nameProduct" type="hidden" />
+                <input v-model="weightProduct" type="hidden" />
+                <input v-model="priceProduct" type="hidden" />
                 <div class="form-group mb-4">
                   <input
+                    v-model="name"
+                    type="text"
+                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    id="exampleInput90"
+                    placeholder="Имя"
+                  />
+                </div>
+                <div class="form-group mb-4">
+                  <input
+                    v-model="email"
                     type="text"
                     class="mask-email form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Ваш e-mail"
                   />
+                  <div class="emailErr"></div>
                 </div>
                 <div class="form-group mb-4">
                   <input
+                    v-model="phone"
                     type="text"
                     class="mask-phone form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="+7 (999) 999-99-99"
+                    name="phone"
+                    data-phone-pattern
                   />
                 </div>
                 <div class="form-group mb-4">
                   <input
+                    v-model="date"
                     id="start"
                     type="date"
                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -109,7 +127,6 @@
                     персональных данных</label
                   >
                 </div>
-
                 <button
                   type="submit"
                   class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -130,9 +147,6 @@ const priceWeightStore = usePriceWeightStore();
 const productStore = useProductStore();
 const route = useRoute();
 
-const email = ref();
-const emailErr = ref(false);
-
 const { data: product } = await useAsyncData("product", () =>
   $fetch("https://api.tortam.ru/api/v1/product/" + route.params.slug)
 );
@@ -140,6 +154,15 @@ const { data: product } = await useAsyncData("product", () =>
 const { data: fillings } = await useAsyncData("fillings", () =>
   $fetch("https://api.tortam.ru/api/v1/fillings")
 );
+
+const nameProduct = ref("");
+const weightProduct = ref("");
+const priceProduct = ref("");
+const name = ref("");
+const email = ref("");
+const phone = ref("");
+const date = ref("");
+const emailErr = ref(false);
 
 useHead({
   title: product.value.name,
@@ -152,14 +175,41 @@ useHead({
   ],
 });
 
-const handleSubmit = () => {
-  const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-  if (!regex.test(email.value)) {
-    emailErr.value = true;
-    return;
-  } else {
-    emailErr.value = false;
-  }
+const handleSubmit = async () => {
+  // const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+  // if (!regex.test(email.value)) {
+  //   emailErr.value = true;
+  //   // let emailErrText =
+  //   document.querySelector('.emailErr').innerHTML  = 'Введите корректный emial';
+  //   return;
+  // } else {
+  //   emailErr.value = false;
+  // }
+
+  nameProduct.value = document.querySelector("h1").innerHTML;
+  weightProduct.value = document.querySelector("#numWeigth").innerHTML;
+  priceProduct.value = document.querySelector("#price_order").innerHTML;
+
+  const getParamForm =
+    "&nameProduct=" +
+    nameProduct.value +
+    "&weightProduct=" +
+    weightProduct.value +
+    "&priceProduct=" +
+    priceProduct.value +
+    "&name=" +
+    name.value +
+    "&email=" +
+    email.value +
+    "&phone=" +
+    phone.value +
+    "&date=" +
+    date.value;
+
+  const res = await useAsyncData("res", () =>
+    $fetch("https://api.tortam.ru/api/v1/mail?" + getParamForm)
+  );
+  console.log(res);
 };
 
 onMounted(() => {
@@ -172,6 +222,20 @@ onMounted(() => {
   } else {
     localStorage.prevUrl = route.fullPath;
   }
+
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1;
+  let yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+
+  today = yyyy + "-" + mm + "-" + dd;
+  document.querySelector("#start").setAttribute("min", today);
 });
 </script>
 
@@ -274,13 +338,6 @@ h1 {
   cursor: pointer;
 }
 
-
-
-
-
-
-
-
 .page_filling .items {
   display: flex;
   gap: 10px;
@@ -295,7 +352,6 @@ h1 {
 .page_filling .item {
   position: relative;
 }
-
 
 .page_filling .item:nth-child(-n + 3) {
   display: block;
@@ -315,7 +371,6 @@ h1 {
   height: auto;
   margin: 0 0 0 -5px;
 }
-
 
 @media (max-width: 900px) {
   .product-desc {
