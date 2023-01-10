@@ -12,7 +12,7 @@
 
 // const productStore = useProductStore();
 
-const { data: products } = await useAsyncData("product", () =>
+const { data: products } = await useAsyncData("products", () =>
   $fetch("https://api.tortam.ru/api/v1/products")
 );
 
