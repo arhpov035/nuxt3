@@ -5,7 +5,7 @@
         <div class="img">
           <img
             class="img-fluid"
-            :src="`../images/${product.image}`"
+            :src="`../images/products/${product.image}`"
             :alt="product.image"
           />
         </div>
