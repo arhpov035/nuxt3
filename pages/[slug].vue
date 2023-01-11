@@ -1,9 +1,11 @@
 <template>
-<div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+  <h1 class="text-gray-700 text-2xl">{{ category.name }}</h1>
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
     <Product
-        v-for="product of category.products"
-        :key="product.id"
-        :product="product" />
+      v-for="product of category.products"
+      :key="product.id"
+      :product="product"
+    />
   </div>
 </template>
 
@@ -15,8 +17,8 @@ const { data: category } = await useAsyncData("category", () =>
 );
 
 useHead({
-  title: product.value.name,
-  meta: [{ name: "description", content: product.value.description }],
+  title: "Категория " + category.value.name,
+  meta: [{ name: "description", content: "Категория " + category.value.name }],
   bodyAttrs: { class: "test" },
   script: [
     {
@@ -24,5 +26,4 @@ useHead({
     },
   ],
 });
-
 </script>

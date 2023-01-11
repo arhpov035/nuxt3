@@ -64,10 +64,7 @@
     <!-- Background image -->
     <div
       v-if="route.fullPath === '/'"
-      :class="[
-        'relative overflow-hidden bg-no-repeat bg-cover',
-        { active: headerStore.displayBlock === 1 },
-      ]"
+      class="relative overflow-hidden bg-no-repeat bg-cover"
       style="
         background-position: 50%;
         background-image: url('https://mykaleidoscope.ru/uploads/posts/2021-09/1632868639_10-mykaleidoscope-ru-p-tort-stok-krasivo-foto-11.jpg');
@@ -101,7 +98,6 @@
 <script setup>
 const route = useRoute();
 console.log(route.fullPath);
-const headerStore = useHeaderStore();
 
 const { data: menus } = await useAsyncData("menus", () =>
   $fetch("https://api.tortam.ru/api/v1/categories")
@@ -111,7 +107,7 @@ const { data: menus } = await useAsyncData("menus", () =>
 <style scoped>
 @media (max-width: 480px) {
   header {
-    margin-top: 55xp;
+    margin-top: 55px;
   }
 }
 </style>
