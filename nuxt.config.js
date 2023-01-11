@@ -1,9 +1,4 @@
 export default {
-  runtimeConfig: {
-    public: {
-      // baseURL: process.env.BASE_URL || 'https://api.tortam.ru/api/v1',
-    },
-  },
   app: {
     head: {
       title: "Торты 🎂 и капкейки на заказ в Тамбове",
@@ -74,26 +69,15 @@ export default {
   buildModules: ["@nuxtjs/eslint-module"],
 
   modules: [
-    // [`@twicpics/components/nuxt3`],
-    // "@nuxtjs/tailwindcss",
     [
       "@pinia/nuxt",
-      "@nuxtjs/axios",
-      "@nuxtjs/proxy",
       {
         autoImports: ["defineStore", "acceptHMRUpdate"],
       },
     ],
+    // '@nuxtjs/robots',
   ],
-  axios: {
-    // baseURL: "https://api.tortam.ru/api/v1",
-    credentials: true,
-    common: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  },
-
+  robots: {    /* module options */  },
   build: {
     extend(config, ctx) {
       if (ctx.dev && ctx.isClient) {
