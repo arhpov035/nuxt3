@@ -5,7 +5,7 @@
         <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
           <img
             class="rounded-t-lg"
-            :src="`/images/${product.image}`"
+            :src="`/images/products/${product.image}`"
             :alt="product.image"
           />
         </a>
