@@ -45,31 +45,13 @@
                 >Главная</NuxtLink
               >
             </li>
-            <li class="nav-item">
-              <a
+            <li class="nav-item" v-for="menu of menus" :key="menu.id">
+              <NuxtLink
                 class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
-                href="#!"
+                :to="`/${menu.slug}`"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
-                >Features</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
-                href="#!"
-                data-mdb-ripple="true"
-                data-mdb-ripple-color="light"
-                >Pricing</a
-              >
-            </li>
-            <li class="nav-item mb-2 lg:mb-0">
-              <a
-                class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
-                href="#!"
-                data-mdb-ripple="true"
-                data-mdb-ripple-color="light"
-                >About</a
+                >{{ menu.name }}</NuxtLink
               >
             </li>
           </ul>
@@ -121,4 +103,15 @@ const route = useRoute();
 console.log(route.fullPath);
 const headerStore = useHeaderStore();
 
+const { data: menus } = await useAsyncData("menus", () =>
+  $fetch("https://api.tortam.ru/api/v1/categories")
+);
 </script>
+
+<style scoped>
+@media (max-width: 480px) {
+  header {
+    margin-top: 55xp;
+  }
+}
+</style>
