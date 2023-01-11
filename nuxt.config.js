@@ -76,8 +76,28 @@ export default {
       },
     ],
     // '@nuxtjs/robots',
+    'nuxt-simple-sitemap',
   ],
   robots: {    /* module options */  },
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: [
+        '/',
+        // any URLs that can't be discovered by crawler
+        // '/my-hidden-url'
+      ]
+    }
+  },
+  // Recommended 
+  runtimeConfig: {
+    siteUrl: 'https://tortam.ru',
+  },
+  // OR 
+  sitemap: {
+    hostname: 'https://tortam.ru',
+  },
+
   build: {
     extend(config, ctx) {
       if (ctx.dev && ctx.isClient) {
