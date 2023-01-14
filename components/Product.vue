@@ -5,7 +5,7 @@
         <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
           <img
             class="rounded-t-lg"
-            :src="`/images/products/${product.image}`"
+            :src="`http://api.tortam.ru/storage/${product.image}`"
             :alt="product.image"
           />
         </a>

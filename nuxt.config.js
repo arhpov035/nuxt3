@@ -1,4 +1,5 @@
-export default {
+import { defineNuxtConfig } from "nuxt/config";
+export default defineNuxtConfig({
   app: {
     head: {
       title: "Торты 🎂 и капкейки на заказ в Тамбове",
@@ -17,12 +18,31 @@ export default {
         { name: "format-detection", content: "telephone=no" },
       ],
       link: [
-        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        {
+          rel: "icon",
+          type: "image/x-icon",
+          href: "https://tortam.ru/favicon.ico",
+        },
         { rel: "stylesheet", type: "text/css", href: "/css/main.css" },
-        { rel: "stylesheet", type: "text/css", href: "/css/tailwind.all.min.css" },
+        {
+          rel: "stylesheet",
+          type: "text/css",
+          href: "/css/tailwind.all.min.css",
+        },
         { rel: "stylesheet", type: "text/css", href: "/css/output.css" },
-        { rel: "stylesheet", type: "text/css", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" },
-        { rel: "stylesheet", type: "text/css", href: "https://use.fontawesome.com/releases/v5.6.1/css/all.css", integrity: "sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP", crossorigin: "anonymous" },
+        {
+          rel: "stylesheet",
+          type: "text/css",
+          href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+        },
+        {
+          rel: "stylesheet",
+          type: "text/css",
+          href: "https://use.fontawesome.com/releases/v5.6.1/css/all.css",
+          integrity:
+            "sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP",
+          crossorigin: "anonymous",
+        },
       ],
       script: [
         {
@@ -69,6 +89,7 @@ export default {
   buildModules: ["@nuxtjs/eslint-module"],
 
   modules: [
+    '@formkit/nuxt',
     [
       "@pinia/nuxt",
       {
@@ -76,26 +97,28 @@ export default {
       },
     ],
     // '@nuxtjs/robots',
-    'nuxt-simple-sitemap',
+    "nuxt-simple-sitemap",
   ],
-  robots: {    /* module options */  },
+  robots: {
+    /* module options */
+  },
   nitro: {
     prerender: {
       crawlLinks: true,
       routes: [
-        '/',
+        "/",
         // any URLs that can't be discovered by crawler
         // '/my-hidden-url'
-      ]
-    }
+      ],
+    },
   },
-  // Recommended 
+  // Recommended
   runtimeConfig: {
-    siteUrl: 'https://tortam.ru',
+    siteUrl: "https://tortam.ru",
   },
-  // OR 
+  // OR
   sitemap: {
-    hostname: 'https://tortam.ru',
+    hostname: "https://tortam.ru",
   },
 
   build: {
@@ -113,4 +136,4 @@ export default {
       }
     },
   },
-};
+});
