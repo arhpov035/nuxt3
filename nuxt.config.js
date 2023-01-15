@@ -62,6 +62,11 @@ export default defineNuxtConfig({
           src: "/js/tailwind.js",
           body: true,
         },
+        // },
+        {
+          src: "/js/i-mask.js",
+          body: true,
+        },
         {
           src: "/js/main.js",
         },
