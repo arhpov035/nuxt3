@@ -7,4 +7,5 @@ src
 .output
 .env
 dist
+nuxt.config.js
 robots.config.js
