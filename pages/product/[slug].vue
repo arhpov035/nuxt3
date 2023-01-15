@@ -5,7 +5,7 @@
         <div class="img">
           <img
             class="img-fluid"
-            :src="`../images/products/${product.image}`"
+            :src="`https://api.tortam.ru/storage/${product.image}`"
             :alt="product.image"
           />
         </div>
@@ -49,96 +49,19 @@
       </div>
     </div>
     <!-- Modal -->
-    <div
-      class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-      id="orderModal"
-      tabindex="-1"
-      aria-labelledby="orderModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog relative w-auto pointer-events-none">
-        <div
-          class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current"
-        >
-          <div
-            class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md"
-          >
-            <h5
-              class="text-xl font-medium leading-normal text-gray-800"
-              id="orderModalLabel"
-            >
-              Оформление заказа
-            </h5>
-            <button
-              type="button"
-              class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body relative p-4">
-            <div class="block p-6 rounded-lg bg-white max-w-md">
-              <form @submit.prevent="handleSubmit">
-                <input v-model="nameProduct" type="hidden" />
-                <input v-model="weightProduct" type="hidden" />
-                <input v-model="priceProduct" type="hidden" />
-                <div class="form-group mb-4">
-                  <input
-                    v-model="name"
-                    type="text"
-                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    id="exampleInput90"
-                    placeholder="Имя"
-                  />
-                </div>
-                <div class="form-group mb-4">
-                  <input
-                    v-model="email"
-                    type="text"
-                    class="mask-email form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Ваш e-mail"
-                  />
-                  <div class="emailErr"></div>
-                </div>
-                <div class="form-group mb-4">
-                  <input
-                    v-model="phone"
-                    type="text"
-                    class="mask-phone form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="+7 (999) 999-99-99"
-                    name="phone"
-                    data-phone-pattern
-                  />
-                </div>
-                <div class="form-group mb-4">
-                  <input
-                    v-model="date"
-                    id="start"
-                    type="date"
-                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    min=""
-                  />
-                </div>
-                <div class="form-group form-check text-center mb-2">
-                  <label
-                    class="form-check-label inline-block text-gray-800 text-sm"
-                    for="exampleCheck25"
-                    >Нажимая на кнопку "Отправить", я даю согласие на обработку
-                    персональных данных</label
-                  >
-                </div>
-                <button
-                  type="submit"
-                  class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                >
-                  Оформить
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ModalFormOrder
+      :handleSubmit="handleSubmit"
+      :errPhone="errPhone"
+      :active="active"
+      v-model:nameProduct="nameProduct"
+      v-model:weightProduct="weightProduct"
+      v-model:priceProduct="priceProduct"
+      v-model:name="name"
+      v-model:email="email"
+      v-model:phone="phone"
+      v-model:date="date"
+    />
+    <ModalSuccessFormOrder />
   </div>
 </template>
 
@@ -162,7 +85,9 @@ const name = ref("");
 const email = ref("");
 const phone = ref("");
 const date = ref("");
-const emailErr = ref(false);
+const errPhone = ref(false);
+
+const active = ref(false);
 
 useHead({
   title: product.value.name,
@@ -206,13 +131,24 @@ const handleSubmit = async () => {
     "&date=" +
     date.value;
 
-  const res = await useAsyncData("res", () =>
-    $fetch("https://api.tortam.ru/api/v1/mail?" + getParamForm)
-  );
-  console.log(res);
+  if (phone.value.replace(/[^\d.-]/g, "").length >= 11) {
+    active.value = false;
+    document.querySelector(".btn-close").click();
+    document.querySelector("#openSuccessFormOrder").click();
+
+    const res = await useAsyncData("res", () =>
+      $fetch("https://api.tortam.ru/api/v1/mail?" + getParamForm)
+    );
+    console.log(phone.value.replace(/[^\d.-]/g, "").length);
+    console.log(getParamForm);
+  } else {
+    active.value = true;
+  }
 };
 
 onMounted(() => {
+  maskPhone();
+
   if (localStorage.prevUrl != route.fullPath) {
     localStorage.prevUrl = route.fullPath;
     localStorage.activeWeight = 2;
@@ -239,18 +175,7 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-.error {
-  display: none;
-}
-.error.active {
-  display: block;
-  border: 1px solid red;
-  color: red;
-}
-header {
-  display: none;
-}
+<style>
 .container-product {
   max-width: 1380px;
   width: 100%;
