@@ -94,7 +94,6 @@ export default defineNuxtConfig({
   buildModules: ["@nuxtjs/eslint-module"],
 
   modules: [
-    '@formkit/nuxt',
     [
       "@pinia/nuxt",
       {

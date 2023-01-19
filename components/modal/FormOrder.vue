@@ -6,7 +6,9 @@
     aria-labelledby="orderModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
+    <div
+      class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none"
+    >
       <div
         class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current"
       >
@@ -65,7 +67,9 @@
                   autofocus="autofocus"
                   placeholder="+7(___)___-__-__"
                 />
-                <div :class="['error', { active: active === true }]">Телефон обязательное поле</div>
+                <div :class="['error', { active: active === true }]">
+                  Телефон обязательное поле
+                </div>
               </div>
               <div class="form-group mb-4">
                 <input
@@ -77,6 +81,72 @@
                   min=""
                 />
               </div>
+
+              <div class="flex items-center justify-center">
+                <div class="datepicker relative form-floating mb-3 xl:w-96">
+                  <input
+                    type="date"
+                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Select a date"
+                  />
+                  <label for="floatingInput" class="text-gray-700"
+                    >Select a date</label
+                  >
+                  <div class="datepicker-toggle-button">
+                    <i class="fas fa-calendar datepicker-toggle-icon"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-center">
+                <div class="datepicker relative form-floating mb-3 xl:w-96">
+                  <input
+                    type="text"
+                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Select a date"
+                  />
+                  <label for="floatingInput" class="text-gray-700"
+                    >Select a date</label
+                  >
+                  <div class="datepicker-toggle-button">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-center">
+                <div class="datepicker relative form-floating mb-3 xl:w-96">
+                  <input
+                    type="text"
+                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Select a date"
+                  />
+                  <label for="floatingInput" class="text-gray-700"
+                    >Select a date</label
+                  >
+                  <div class="datepicker-toggle-button">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-center">
+                <div class="datepicker relative form-floating mb-3 xl:w-96">
+                  <input
+                    type="text"
+                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Select a date"
+                  />
+                  <label for="floatingInput" class="text-gray-700"
+                    >Select a date</label
+                  >
+                  <div class="datepicker-toggle-button">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+
+
+                  </div>
+                </div>
+              </div>
+
               <div class="form-group form-check text-center mb-2">
                 <label
                   class="form-check-label inline-block text-gray-800 text-sm"

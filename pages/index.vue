@@ -1,6 +1,12 @@
 <template>
   <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
     <Product v-for="product of products" :key="product.id" :product="product" />
+    <Product
+      v-for="product of showProducts"
+      :key="product.id"
+      :product="product"
+    />
+
     <ModalFormOrder
       :handleSubmit="handleSubmit"
       :errPhone="errPhone"
@@ -15,16 +21,46 @@
     />
     <ModalSuccessFormOrder />
   </div>
+  <button
+    @click="showMore"
+    type="button"
+    class="inline-block px-6 py-2.5 bg-gray-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-900 hover:shadow-lg focus:bg-gray-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-900 active:shadow-lg transition duration-150 ease-in-out"
+  >
+    Показать ещё
+  </button>
 </template>
 
 <script setup>
-// import { useProductStore } from "@/stores/ProductStore";
+import { ref, computed, watch } from "vue";
 
-// const productStore = useProductStore();
+const showProducts = ref();
+
+const productStore = useProductStore();
+console.log(productStore.skip);
 
 const { data: products } = await useAsyncData("products", () =>
-  $fetch("https://api.tortam.ru/api/v1/products")
+  $fetch("https://api.tortam.ru/api/v1/products/")
 );
+
+const showMore = async () => {
+  productStore.skip += 8;
+  const res = await fetch(
+    "https://api.tortam.ru/api/v1/products/" + productStore.skip
+  );
+  const r = await res.json();
+
+  if (productStore.skip == 8) {
+    showProducts.value = r;
+  } else {
+    r.forEach(function (element, key) {
+      showProducts.value.push(element);
+      console.log(key + ": " + element);
+    });
+  }
+
+  console.log(showProducts.value);
+  console.log(444);
+};
 
 const route = useRoute();
 
@@ -34,7 +70,6 @@ const nameProduct = ref("");
 const weightProduct = ref("");
 const priceProduct = ref("");
 const name = ref("");
-const nameH1 = ref("");
 const email = ref("");
 const phone = ref("");
 const date = ref("");
@@ -43,7 +78,7 @@ const errPhone = ref(false);
 const active = ref(false);
 
 const handleSubmit = async () => {
-console.log(nameProduct.value);
+  console.log(nameProduct.value);
   weightProduct.value = 2;
   priceProduct.value = 2800;
 
@@ -80,13 +115,15 @@ console.log(nameProduct.value);
 
 onMounted(() => {
   maskPhone();
-  Array.from(document.getElementsByClassName('indexOrder')).forEach((button) => {
-     button.addEventListener('click', (e)=>{
-           e.preventDefault();
-           nameProduct.value = e.target.getAttribute('data-name')
-           console.log(e.target.getAttribute('data-name'));
-     })
-});
+  Array.from(document.getElementsByClassName("indexOrder")).forEach(
+    (button) => {
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        nameProduct.value = e.target.getAttribute("data-name");
+        console.log(e.target.getAttribute("data-name"));
+      });
+    }
+  );
 
   let today = new Date();
   let dd = today.getDate();
