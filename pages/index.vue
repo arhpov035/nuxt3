@@ -2,7 +2,7 @@
   <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
     <Product v-for="product of products" :key="product.id" :product="product" />
     <Product
-      v-for="product of showProducts"
+      v-for="product of productStore.showProducts"
       :key="product.id"
       :product="product"
     />
@@ -33,14 +33,16 @@
 <script setup>
 import { ref, computed, watch } from "vue";
 
-const showProducts = ref();
-
 const productStore = useProductStore();
-console.log(productStore.skip);
 
-const { data: products } = await useAsyncData("products", () =>
-  $fetch("https://api.tortam.ru/api/v1/products/")
+const showProducts = ref();
+const skip = ref(0);
+
+const { data: products } = await useAsyncData("product", () =>
+  $fetch("http://api.tortam.ru/api/v1/products")
 );
+
+const route = useRoute();
 
 const showMore = async () => {
   productStore.skip += 8;
@@ -48,24 +50,17 @@ const showMore = async () => {
     "https://api.tortam.ru/api/v1/products/" + productStore.skip
   );
   const r = await res.json();
-
-  if (productStore.skip == 8) {
-    showProducts.value = r;
+  if (productStore.showProducts === undefined) {
+    productStore.showProducts = r;
   } else {
     r.forEach(function (element, key) {
-      showProducts.value.push(element);
+      productStore.showProducts.push(element);
       console.log(key + ": " + element);
     });
   }
-
-  console.log(showProducts.value);
+  console.log(productStore.showProducts);
   console.log(444);
 };
-
-const route = useRoute();
-
-// console.log(route.fullPath);
-
 const nameProduct = ref("");
 const weightProduct = ref("");
 const priceProduct = ref("");
@@ -74,14 +69,11 @@ const email = ref("");
 const phone = ref("");
 const date = ref("");
 const errPhone = ref(false);
-
 const active = ref(false);
-
 const handleSubmit = async () => {
   console.log(nameProduct.value);
   weightProduct.value = 2;
   priceProduct.value = 2800;
-
   const getParamForm =
     "&nameProduct=" +
     nameProduct.value +
@@ -97,12 +89,10 @@ const handleSubmit = async () => {
     phone.value +
     "&date=" +
     date.value;
-
   if (phone.value.replace(/[^\d.-]/g, "").length >= 11) {
     active.value = false;
     document.querySelector(".btn-close").click();
     document.querySelector("#openSuccessFormOrder").click();
-
     const res = await useAsyncData("res", () =>
       $fetch("https://api.tortam.ru/api/v1/mail?" + getParamForm)
     );
@@ -112,7 +102,6 @@ const handleSubmit = async () => {
     active.value = true;
   }
 };
-
 onMounted(() => {
   maskPhone();
   Array.from(document.getElementsByClassName("indexOrder")).forEach(
@@ -124,7 +113,6 @@ onMounted(() => {
       });
     }
   );
-
   let today = new Date();
   let dd = today.getDate();
   let mm = today.getMonth() + 1;
@@ -135,7 +123,6 @@ onMounted(() => {
   if (mm < 10) {
     mm = "0" + mm;
   }
-
   today = yyyy + "-" + mm + "-" + dd;
   document.querySelector("#start").setAttribute("min", today);
 });
