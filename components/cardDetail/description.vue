@@ -1,8 +1,10 @@
 <template>
   <div class="page-description">
     <div class="title">Описание</div>
+    <!-- {{ description }} -->
+    <div v-if="description" class="desription">{{ description }}</div>
 
-    <ol class="params">
+    <ol v-else class="params">
       <li>
         <div>Категория</div>
         <div></div>
@@ -47,7 +49,20 @@
   </div>
 </template>
 
+<script setup>
+const props = defineProps({
+  description: {
+    type: String,
+    default: false,
+  }
+});
+</script>
+
 <style scoped>
+.desription {
+  max-width: 500px;
+  width: 100%;
+}
 .page-description {
   padding-left: 20px;
   padding-right: 20px;

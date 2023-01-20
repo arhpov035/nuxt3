@@ -44,7 +44,9 @@
         <CardDetailSidebarLeft />
       </div>
       <div class="container-bottom">
-        <CardDetailDescription />
+        <CardDetailDescription 
+        :description="product.description"
+        />
         <CardDetailFormComment />
       </div>
     </div>
