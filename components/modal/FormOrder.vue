@@ -29,83 +29,42 @@
           ></button>
         </div>
         <div class="modal-body relative p-4">
-          <div class="block p-6 rounded-lg bg-white max-w-md">
+          <div class="block p-6 rounded-lg bg-white w-full">
             <form @submit.prevent="handleSubmit">
               <input :value="nameProduct" type="hidden" />
               <input :value="weightProduct" type="hidden" />
               <input :value="priceProduct" type="hidden" />
-              <div class="form-group mb-4">
-                <input
-                  :value="name"
-                  @input="$emit('update:name', $event.target.value)"
-                  type="text"
-                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="exampleInput90"
-                  placeholder="Имя"
-                />
-              </div>
-              <div class="form-group mb-4">
-                <input
-                  id="emailOrder"
-                  :value="email"
-                  @input="$emit('update:email', $event.target.value)"
-                  type="text"
-                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Ваш e-mail"
-                />
-                <div class="emailErr"></div>
-              </div>
-              <div class="form-group mb-4">
-                <input
-                  id="online_phone"
-                  :value="phone"
-                  @input="$emit('update:phone', $event.target.value)"
-                  name="phone"
-                  class="mask-phone form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  type="text"
-                  maxlength="50"
-                  autofocus="autofocus"
-                  placeholder="+7(___)___-__-__"
-                />
-                <div :class="['error', { active: active === true }]">
-                  Телефон обязательное поле
-                </div>
-              </div>
-              <div class="form-group mb-4">
-                <input
-                  :value="date"
-                  @input="$emit('update:date', $event.target.value)"
-                  id="start"
-                  type="date"
-                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  min=""
-                />
-              </div>
 
               <div class="flex items-center justify-center">
-                <div class="datepicker relative form-floating mb-3 xl:w-96">
+                <div class="datepicker relative form-floating mb-3 w-full">
                   <input
-                    type="date"
+                    :value="name"
+                    @input="$emit('update:name', $event.target.value)"
+                    type="text"
                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Select a date"
+                    id="exampleInput90"
+                    placeholder="Имя"
                   />
-                  <label for="floatingInput" class="text-gray-700"
-                    >Select a date</label
-                  >
+                  <label for="floatingInput" class="text-gray-700">Имя</label>
                   <div class="datepicker-toggle-button">
-                    <i class="fas fa-calendar datepicker-toggle-icon"></i>
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
+
               <div class="flex items-center justify-center">
-                <div class="datepicker relative form-floating mb-3 xl:w-96">
+                <div class="datepicker relative form-floating mb-3 w-full">
                   <input
+                    id="emailOrder"
+                    :value="email"
+                    @input="$emit('update:email', $event.target.value)"
                     type="text"
                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Select a date"
+                    placeholder="Ваш e-mail"
                   />
+                  <div class="emailErr"></div>
                   <label for="floatingInput" class="text-gray-700"
-                    >Select a date</label
+                    >Ваш e-mail</label
                   >
                   <div class="datepicker-toggle-button">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -114,36 +73,43 @@
               </div>
 
               <div class="flex items-center justify-center">
-                <div class="datepicker relative form-floating mb-3 xl:w-96">
+                <div class="datepicker relative form-floating mb-3 w-full">
                   <input
+                    id="online_phone"
+                    :value="phone"
+                    @input="$emit('update:phone', $event.target.value)"
+                    name="phone"
+                    class="mask-phone form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     type="text"
-                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Select a date"
+                    maxlength="50"
+                    autofocus="autofocus"
+                    placeholder="+7(___)___-__-__"
                   />
+                  <div :class="['error', { active: active === true }]">
+                    Телефон обязательное поле
+                  </div>
                   <label for="floatingInput" class="text-gray-700"
-                    >Select a date</label
+                    >Телефон</label
                   >
                   <div class="datepicker-toggle-button">
                     <i class="fa fa-phone" aria-hidden="true"></i>
-
                   </div>
                 </div>
               </div>
+
               <div class="flex items-center justify-center">
-                <div class="datepicker relative form-floating mb-3 xl:w-96">
+                <div class="datepicker relative form-floating mb-3 w-full">
                   <input
-                    type="text"
-                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Select a date"
+                    :value="date"
+                    @input="$emit('update:date', $event.target.value)"
+                    id="start"
+                    type="date"
+                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-black-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    min=""
                   />
                   <label for="floatingInput" class="text-gray-700"
-                    >Select a date</label
+                    >Выберите дату</label
                   >
-                  <div class="datepicker-toggle-button">
-                    <i class="fa fa-user-circle" aria-hidden="true"></i>
-
-
-                  </div>
                 </div>
               </div>
 
