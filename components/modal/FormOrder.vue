@@ -180,4 +180,8 @@ emits: ["update:name", "update:phone", "update:email", "update:date"];
 .error.active {
   display: block;
 }
+::-webkit-calendar-picker-indicator {
+filter: invert(1);
+
+}
 </style>
