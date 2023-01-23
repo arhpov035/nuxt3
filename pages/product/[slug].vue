@@ -10,11 +10,20 @@
           />
         </div>
 
-        <CardDetailRigthCake :product="product" :fillings="fillings" v-if="product.category.id === 1" />
+        <CardDetailRigthCake
+          :product="product"
+          :fillings="fillings"
+          v-if="product.category.id === 1"
+        />
 
-        <CardDetailRigthCupcake :product="product" v-if="product.category.id === 2" />
+        <CardDetailRigthCupcake
+          :product="product"
+          v-if="product.category.id === 2"
+        />
 
-        <CardDetailSidebarLeft />
+        <CardDetailSidebarLeft v-if="product.category.id === 1" />
+
+        <CardDetailSidebarLeftCupcake v-if="product.category.id === 2" />
       </div>
       <div class="container-bottom">
         <CardDetailDescription :description="product.description" />
@@ -103,6 +112,8 @@ const handleSubmit = async () => {
     phone.value +
     "&date=" +
     date.value;
+
+  console.log(getParamForm);
 
   if (phone.value.replace(/[^\d.-]/g, "").length >= 11) {
     active.value = false;
