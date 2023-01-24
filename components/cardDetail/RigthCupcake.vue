@@ -16,45 +16,42 @@
         <div class="select_weight">Выберите количество:</div>
         <div class="pieces">
           <div class="items">
-            <div class="prev" :class="{ opacity: priceSetPieceStore.isOpacityPrev }">
-              <SvgArrowCircleLeft @click="priceSetPieceStore.prev(priceSetPieceStore.activePiece)" />
+            <div
+              class="prev"
+              :class="{ opacity: priceSetPieceStore.isOpacityPrev }"
+            >
+              <SvgArrowCircleLeft
+                @click="priceSetPieceStore.prev()"
+              />
             </div>
 
-            <div :class="['piece', { active: priceSetPieceStore.activePiece === 1 }]">
-              <div class="items">
+            <div class="piece-slide">
+              <div
+                class="piece-slide-line"
+                :style="{ left: -priceSetPieceStore.offset + 'px' }"
+              >
                 <div
-                  :class="['item', { active: priceSetPieceStore.activeItem === index + 5 }]"
-                  @click="priceSetPieceStore.setActive(index + 5)"
-                  v-for="index in 5" :key="index"
+                  :class="[
+                    'item',
+                    {
+                      active:
+                        priceSetPieceStore.activeItem === indexItem + index,
+                    },
+                  ]"
+                  @click="priceSetPieceStore.setActive(indexItem + index)"
+                  v-for="index in 15"
+                  :key="index"
                 >
-                  {{ index + 5 }}
+                  {{ indexItem + index }}
                 </div>
               </div>
             </div>
-            <div :class="['piece', { active: priceSetPieceStore.activePiece === 2 }]">
-              <div class="items">
-                <div
-                  :class="['item', { active: priceSetPieceStore.activeItem === index + 10 }]"
-                  @click="priceSetPieceStore.setActive(index + 10)"
-                  v-for="index in 5" :key="index"
-                >
-                  {{ index + 10 }}
-                </div>
-              </div>
-            </div>
-            <div :class="['piece', { active: priceSetPieceStore.activePiece === 3 }]">
-              <div class="items">
-                <div
-                  :class="['item', { active: priceSetPieceStore.activeItem === index + 15 }]"
-                  @click="priceSetPieceStore.setActive(index + 15)"
-                  v-for="index in 5" :key="index"
-                >
-                  {{ index + 15 }}
-                </div>
-              </div>
-            </div>
-            <div class="next" :class="{ opacity: priceSetPieceStore.isOpacityNext }">
-              <SvgArrowCircleRight @click="priceSetPieceStore.next(priceSetPieceStore.activePiece)" />
+
+            <div
+              class="next"
+              :class="{ opacity: priceSetPieceStore.isOpacityNext }"
+            >
+              <SvgArrowCircleRight @click="priceSetPieceStore.next()" />
             </div>
           </div>
         </div>
@@ -160,26 +157,37 @@ const props = defineProps({
   },
 });
 
+
 const indexItem = ref(5);
-console.log(1);
-console.log(priceSetPieceStore.activePiece);
-console.log(2);
 
-
-
-const setPriceChangePieces = (id) => {
-  activeWeight.value = id;
-  localStorage.activeWeight = activeWeight.value;
-
-  price.value = priceKg.value * id;
-  localStorage.price = price.value;
-
-  weight.value = id;
-  localStorage.weight = weight.value;
-};
 </script>
 
 <style scoped>
+.piece-slide {
+  width: 275px;
+  overflow: hidden;
+}
+.piece-slide-line {
+  display: flex;
+  transition: all ease 1s;
+  gap: 5px;
+  position: relative;
+}
+.piece-slide-line .item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50%;
+  min-width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.piece-slide-line .item.active {
+  border: 2px solid #009ce6;
+}
+
 .py-3 {
   padding-top: 0;
 }
@@ -228,24 +236,5 @@ const setPriceChangePieces = (id) => {
   gap: 5px;
   justify-content: center;
   align-items: center;
-}
-.piece {
-  display: none;
-}
-.piece .item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-}
-.piece.active {
-  display: block;
-}
-.piece .item.active {
-  border: 2px solid #009ce6;
 }
 </style>
