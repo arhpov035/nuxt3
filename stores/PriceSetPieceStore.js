@@ -11,6 +11,7 @@ export const usePriceSetPieceStore = defineStore("priceSetPieceStore", () => {
   const activePiece = ref(1);
   const isOpacityPrev = ref(true);
   const isOpacityNext = ref(false);
+  const offset = ref(0);
 
   const setActive = (id) => {
     activeItem.value = id;
@@ -23,35 +24,28 @@ export const usePriceSetPieceStore = defineStore("priceSetPieceStore", () => {
     localStorage.piece = piece.value;
   };
 
-  const prev = (id) => {
-    if (id == 3) {
-      activePiece.value = 2;
-      localStorage.activePiece = activePiece.value;
-
+  const prev = () => {
+    offset.value = offset.value - 275;
+    localStorage.offset = offset.value;
+      if(offset.value == 0) {
+        isOpacityPrev.value = true;
+        localStorage.isOpacityPrev = isOpacityPrev.value;
+      }
       isOpacityNext.value = false;
       localStorage.isOpacityNext = isOpacityNext.value;
-    } else if (id == 2) {
-      activePiece.value = 1;
-      localStorage.activePiece = activePiece.value;
-
-      isOpacityPrev.value = true;
-      localStorage.isOpacityPrev = isOpacityPrev.value;
-    }
   };
-  const next = (id) => {
-    if (id == 1) {
-      activePiece.value = 2;
-      localStorage.activePiece = activePiece.value;
-
-      isOpacityPrev.value = false;
-      localStorage.isOpacityPrev = isOpacityPrev.value;
-    } else if (id == 2) {
-      activePiece.value = 3;
-      localStorage.activePiece = activePiece.value;
-
-      isOpacityNext.value = true;
-      localStorage.isOpacityNext = isOpacityNext.value;
-    }
+  const next = () => {
+      offset.value = offset.value + 275;
+      localStorage.offset = offset.value;
+      if(offset.value != 0){
+        isOpacityPrev.value = false;
+        localStorage.isOpacityPrev = isOpacityPrev.value;
+      }
+      console.log(offset.value)
+      if(offset.value == 550) {
+        isOpacityNext.value = true;
+        localStorage.isOpacityNext = isOpacityNext.value;
+      }
   };
 
   onMounted(() => {
@@ -76,6 +70,9 @@ export const usePriceSetPieceStore = defineStore("priceSetPieceStore", () => {
     if (localStorage.activeItem) {
       activeItem.value = +localStorage.activeItem;
     }
+    if (localStorage.offset) {
+      offset.value = +localStorage.offset;
+    }
   });
 
   return {
@@ -86,6 +83,7 @@ export const usePriceSetPieceStore = defineStore("priceSetPieceStore", () => {
     activePiece,
     isOpacityPrev,
     isOpacityNext,
+    offset,
     setActive,
     prev,
     next,
