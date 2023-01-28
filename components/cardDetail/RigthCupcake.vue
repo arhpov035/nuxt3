@@ -219,6 +219,7 @@ const indexItem = ref(5);
 }
 .opacity {
   opacity: 0;
+  display: none;
   cursor: inherit;
 }
 .select_weight,

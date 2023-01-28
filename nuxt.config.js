@@ -1,5 +1,6 @@
 import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
+  generate: { fallback: true },
   app: {
     head: {
       title: "Торты 🎂 и капкейки на заказ в Тамбове",
@@ -62,7 +63,6 @@ export default defineNuxtConfig({
           src: "/js/tailwind.js",
           body: true,
         },
-        // },
         {
           src: "/js/i-mask.js",
           body: true,
@@ -96,6 +96,7 @@ export default defineNuxtConfig({
   modules: [
     [
       "@pinia/nuxt",
+      '@nuxtjs/tailwindcss',
       {
         autoImports: ["defineStore", "acceptHMRUpdate"],
       },

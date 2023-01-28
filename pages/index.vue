@@ -33,7 +33,22 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref } from "vue";
+const isStripeLoadedIndex = ref(false);
+
+useHead({
+  script: [
+    {
+      hid: "stripe",
+      src: "/js/tailwind.js",
+      defer: true,
+      body: true,
+      callback: () => {
+        isStripeLoadedIndex.value = true;
+      },
+    },
+  ],
+});
 
 const productStore = useProductStore();
 

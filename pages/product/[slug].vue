@@ -48,13 +48,19 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 const priceWeightStore = usePriceWeightStore();
 const productStore = useProductStore();
 const route = useRoute();
 
+
 const { data: product } = await useAsyncData("product", () =>
   $fetch("https://api.tortam.ru/api/v1/product/" + route.params.slug)
 );
+
+if (!product.value) {
+  throw createError({ statusCode: 404, statusMessage: "Product not found" });
+}
 
 const { data: fillings } = await useAsyncData("fillings", () =>
   $fetch("https://api.tortam.ru/api/v1/fillings")
@@ -71,13 +77,21 @@ const errPhone = ref(false);
 
 const active = ref(false);
 
+// const isStripeLoaded = ref(false);
+
 useHead({
   title: product.value.name,
   meta: [{ name: "description", content: product.value.description }],
   bodyAttrs: { class: "test" },
   script: [
     {
+      // hid: "stripe",
       // src: "/js/tailwind.js",
+      // defer: true,
+      // body: true,
+      // callback: () => {
+      //   isStripeLoaded.value = true;
+      // },
     },
   ],
 });

@@ -54,6 +54,14 @@
                 >{{ menu.name }}</NuxtLink
               >
             </li>
+            <li class="nav-item">
+              <NuxtLink
+                class="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
+                :to="`/contacts`"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="light"
+                >Контакты</NuxtLink>
+            </li>
           </ul>
         </div>
         <Search />
@@ -62,7 +70,7 @@
     <!-- Navbar -->
 
     <!-- Background image -->
-    <div
+    <!-- <div
       v-if="route.fullPath === '/'"
       class="relative overflow-hidden bg-no-repeat bg-cover"
       style="
@@ -90,7 +98,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Background image -->
   </header>
 </template>

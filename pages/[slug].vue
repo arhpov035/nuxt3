@@ -23,11 +23,18 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 const route = useRoute();
 
 const { data: category } = await useAsyncData("category", () =>
   $fetch("https://api.tortam.ru/api/v1/category/" + route.params.slug)
 );
+
+if (!category.value) {
+  throw createError({ statusCode: 404, statusMessage: "Product not found", fatal: true });
+}
+
+const isStripeLoadedCategory = ref(false);
 
 useHead({
   title: "Категория " + category.value.name,
@@ -35,7 +42,13 @@ useHead({
   bodyAttrs: { class: "test" },
   script: [
     {
-      // src: "/js/tailwind.js",
+      hid: "stripe",
+      src: "/js/tailwind.js",
+      defer: true,
+      body: true,
+      callback: () => {
+        isStripeLoadedCategory.value = true;
+      },
     },
   ],
 });

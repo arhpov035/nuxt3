@@ -113,6 +113,19 @@
                 </div>
               </div>
 
+              <div class="flex items-center justify-center">
+                <div class="datepicker relative form-floating mb-3 xl:w-96">
+                  <input
+                    type="text"
+                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Select a date"
+                  />
+                  <label for="floatingInput" class="text-gray-700"
+                    >Select a date</label
+                  >
+                </div>
+              </div>
+
               <div class="form-group form-check text-center mb-2">
                 <label
                   class="form-check-label inline-block text-gray-800 text-sm"
@@ -175,13 +188,11 @@ emits: ["update:name", "update:phone", "update:email", "update:date"];
   color: red;
   font-size: 0.75rem;
 }
-.errPhone {
-}
+
 .error.active {
   display: block;
 }
 ::-webkit-calendar-picker-indicator {
-filter: invert(1);
-
+  filter: invert(1);
 }
 </style>

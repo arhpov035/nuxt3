@@ -7,5 +7,6 @@ src
 .output
 .env
 dist
+slide.vue
 nuxt.config.js
 robots.config.js
