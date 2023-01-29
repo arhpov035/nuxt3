@@ -11,7 +11,7 @@
           >
         </li>
         <li>
-          <NuxtLink class="link" :to="''">
+          <NuxtLink class="link" :to="'/torty'">
             <div class="svg">
               <SvgCakeMobMenu />
             </div>
@@ -19,11 +19,19 @@
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink class="link" :to="''">
+          <NuxtLink class="link" :to="'/kapkeiki'">
             <div class="svg">
               <SvgCapcakeMobMenu />
             </div>
             <span>Капкейки</span></NuxtLink
+          >
+        </li>
+        <li>
+          <NuxtLink class="link" :to="'/contacts'">
+            <div class="svg">
+              <SvgContactsMobile />
+            </div>
+            <span>Контакты</span></NuxtLink
           >
         </li>
       </ul>

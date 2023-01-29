@@ -80,8 +80,8 @@ const active = ref(false);
 // const isStripeLoaded = ref(false);
 
 useHead({
-  title: product.value.name,
-  meta: [{ name: "description", content: product.value.description }],
+  title: product.value.name + ' : купить в Тамбове за 1400 рублей за кг.',
+  meta: [{ name: "description", content:  'Купите ' + product.value.description + ' в Тамбове по цене 1400 рублей за килограмм. Насладитесь неповторимым вкусом и удивительным дизайном своих гостей! Заказывайте сейчас на нашем интернет-магазине.' }],
   bodyAttrs: { class: "test" },
   script: [
     {

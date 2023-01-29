@@ -57,7 +57,6 @@ const nameProduct = ref("");
 const weightProduct = ref("");
 const priceProduct = ref("");
 const name = ref("");
-const nameH1 = ref("");
 const email = ref("");
 const phone = ref("");
 const date = ref("");
