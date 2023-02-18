@@ -1,8 +1,8 @@
 <template>
-  <h1 class="text-gray-700 text-2xl">{{ category.name }}</h1>
+  <h1 class="text-gray-700 text-2xl">{{ products[Object.keys(products)[0]].category.name }}</h1>
   <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
     <Product
-      v-for="product of category.products"
+      v-for="product of products"
       :key="product.id"
       :product="product"
     />
@@ -26,19 +26,32 @@
 import { ref } from "vue";
 const route = useRoute();
 
-const { data: category } = await useAsyncData("category", () =>
-  $fetch("https://api.tortam.ru/api/v1/category/" + route.params.slug)
+const { data: products } = await useAsyncData("products", () =>
+  $fetch("https://api.tortam.ru/api/v1/category/" + route.params.slug, {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
 );
 
-if (!category.value) {
-  throw createError({ statusCode: 404, statusMessage: "Product not found", fatal: true });
+console.log(products.value[0].category.name)
+
+if (!products.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Product not found",
+    fatal: true,
+  });
 }
 
 const isStripeLoadedCategory = ref(false);
 
 useHead({
-  title: "Категория " + category.value.name,
-  meta: [{ name: "description", content: "Категория " + category.value.name }],
+  title: "Категория " +  products.value[0].category.namee,
+  meta: [{ name: "description", content: "Категория " +  products.value[0].category.name  }],
   bodyAttrs: { class: "test" },
   script: [
     {
